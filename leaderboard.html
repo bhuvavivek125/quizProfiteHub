@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QuizProfitHub | Leaderboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="dark-theme">
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-transparent pt-4 pb-4">
+        <div class="container border-bottom border-secondary border-opacity-25 pb-3">
+            <a class="navbar-brand d-flex align-items-center gap-2" href="index.html">
+                <div class="logo-icon"><i class="bi bi-lightning-charge-fill"></i></div>
+                <span class="fw-bold fs-4">QuizProfitHub</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="index.html#categories">Categories</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="leaderboard.html">Leaderboard</a></li>
+                    <li class="nav-item"><a class="nav-link" href="profile.html">Profile</a></li>
+                    <li class="nav-item"><a class="nav-link" href="blog.html">Blog</a></li>
+                    <li class="nav-item"><a class="nav-link" href="contact.html">Contact Us</a></li>
+                </ul>
+                <div class="d-flex align-items-center gap-3">
+                    <div class="points-badge">
+                        <i class="bi bi-trophy-fill text-warning"></i> <span id="wallet-balance">0</span>
+                    </div>
+                    <a href="profile.html" class="profile-icon text-decoration-none">
+                        <i class="bi bi-person-fill"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Leaderboard Header -->
+    <div class="container py-4 text-center">
+        <div class="d-inline-flex justify-content-center align-items-center mb-2" style="width:60px; height:60px; background-color: rgba(34, 197, 94, 0.1); border-radius: 16px;">
+            <i class="bi bi-trophy text-primary-green fs-2"></i>
+        </div>
+        <h1 class="fw-bold my-1">Leaderboard</h1>
+        <p class="text-secondary small">Top quiz champions competing for glory</p>
+    </div>
+
+    <!-- Leaderboard Top Ad -->
+    <div class="container mb-4 text-center">
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9574633923880115" crossorigin="anonymous"></script>
+        <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-9574633923880115" data-ad-slot="4081411500" data-ad-format="auto" data-full-width-responsive="true"></ins>
+        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+
+    <!-- Leaderboard Content -->
+    <div class="container pb-5">
+        
+        <!-- Your Ranking Card -->
+        <div class="ranking-card mb-4">
+            <div class="d-flex align-items-center justify-content-between p-4 flex-wrap gap-3">
+                <div class="d-flex align-items-center gap-3 w-100 w-md-auto">
+                    <div class="avatar-circle bg-success text-dark fw-bold fs-4 d-flex align-items-center justify-content-center" id="user-initials-lead" style="width: 55px; height: 55px; border-radius: 50%;">PL</div>
+                    <div>
+                        <h5 class="fw-bold mb-1" id="user-name-lead">Your Ranking</h5>
+                        <p class="text-secondary small mb-0">Keep playing to climb higher!</p>
+                    </div>
+                </div>
+                <div class="d-flex gap-4 w-100 w-md-auto justify-content-around">
+                    <div class="text-center">
+                        <h4 class="text-primary-green fw-bold mb-0">#---</h4>
+                        <span class="text-secondary small">Rank</span>
+                    </div>
+                    <div class="text-center">
+                        <h4 class="fw-bold mb-0 text-white" id="user-points-lead">0</h4>
+                        <span class="text-secondary small">Points</span>
+                    </div>
+                    <div class="text-center">
+                        <h4 class="fw-bold mb-0 text-white" id="user-level-lead">Lv.1</h4>
+                        <span class="text-secondary small">Level</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Top 3 Podium (Dynamic) -->
+        <div class="row g-4 mb-5" id="podium-row">
+            <!-- Will be injected by JS -->
+        </div>
+
+        <!-- All Rankings List (Dynamic) -->
+        <div class="ranking-list-card">
+            <div class="p-4 border-bottom border-secondary border-opacity-25">
+                <h5 class="fw-bold mb-0">All Rankings</h5>
+            </div>
+            
+            <div class="ranking-rows" id="ranking-list">
+                <!-- Will be injected by JS -->
+            </div>
+        </div>
+                <!-- Row 2 -->
+                <div class="ranking-row d-flex align-items-center p-3 px-4 border-bottom border-light border-opacity-10">
+                    <div class="rank-num text-secondary fw-bold fs-5" style="width: 40px;">2</div>
+                    <div class="avatar-circle bg-dark text-white fw-bold d-flex align-items-center justify-content-center me-3" style="width: 45px; height: 45px; border-radius: 50%;">BS</div>
+                    <div class="flex-grow-1">
+                        <h6 class="fw-bold mb-0">BrainStorm</h6>
+                        <span class="text-secondary small"><i class="bi bi-star"></i> Level 12 &nbsp; <i class="bi bi-fire text-warning"></i> 32 day streak</span>
+                    </div>
+                    <div class="text-end">
+                        <h6 class="text-primary-green fw-bold mb-0">12,850</h6>
+                        <span class="text-secondary" style="font-size: 0.75rem;">points</span>
+                    </div>
+                </div>
+                <!-- Row 3 -->
+                <div class="ranking-row d-flex align-items-center p-3 px-4 border-bottom border-light border-opacity-10">
+                    <div class="rank-num fw-bold fs-5" style="width: 40px; color: #cd7f32;">3</div>
+                    <div class="avatar-circle bg-dark text-white fw-bold d-flex align-items-center justify-content-center me-3" style="width: 45px; height: 45px; border-radius: 50%;">KK</div>
+                    <div class="flex-grow-1">
+                        <h6 class="fw-bold mb-0">KnowledgeKing</h6>
+                        <span class="text-secondary small"><i class="bi bi-star"></i> Level 11 &nbsp; <i class="bi bi-fire text-warning"></i> 25 day streak</span>
+                    </div>
+                    <div class="text-end">
+                        <h6 class="text-primary-green fw-bold mb-0">11,200</h6>
+                        <span class="text-secondary" style="font-size: 0.75rem;">points</span>
+                    </div>
+                </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            renderLeaderboard();
+        });
+
+        function renderLeaderboard() {
+            const moneyEarned = parseInt(localStorage.getItem('moneyEarned') || '0');
+            const xp = parseInt(localStorage.getItem('xp') || '0');
+            const streak = parseInt(localStorage.getItem('streak') || '0');
+            const savedName = localStorage.getItem('userName') || 'Player';
+            const level = Math.floor(xp / 500) + 1;
+
+            // Updated List of global players
+            let players = [
+                { name: 'QuizMaster', pts: 15420, lvl: 15, streak: 45, inits: 'QM' },
+                { name: 'BrainStorm', pts: 12850, lvl: 12, streak: 32, inits: 'BS' },
+                { name: 'KnowledgeKing', pts: 11200, lvl: 11, streak: 25, inits: 'KK' },
+                { name: 'TriviaChamp', pts: 9800, lvl: 10, streak: 18, inits: 'TC' },
+                { name: 'SmartCookie', pts: 8500, lvl: 9, streak: 15, inits: 'SC' },
+                { name: 'QuizNinja', pts: 7200, lvl: 8, streak: 12, inits: 'QN' },
+                { name: 'BrainBox', pts: 6100, lvl: 7, streak: 10, inits: 'BB' },
+                { name: 'WisdomSeeker', pts: 5400, lvl: 6, streak: 8, inits: 'WS' },
+                { name: 'FactFinder', pts: 4800, lvl: 5, streak: 6, inits: 'FF' },
+                { name: 'QuizWhiz', pts: 4200, lvl: 5, streak: 5, inits: 'QW' },
+                { name: savedName, pts: moneyEarned, lvl: level, streak: streak, inits: savedName.substring(0,2).toUpperCase(), isUser: true }
+            ];
+
+            // Sort by points descending
+            players.sort((a, b) => b.pts - a.pts);
+
+            // Update User Card
+            const userRank = players.findIndex(p => p.isUser) + 1;
+            document.getElementById('user-points-lead').innerText = moneyEarned;
+            document.getElementById('user-name-lead').innerText = savedName;
+            document.getElementById('user-initials-lead').innerText = savedName.substring(0, 2).toUpperCase();
+            document.getElementById('user-level-lead').innerText = `Lv.${level}`;
+            document.querySelector('.ranking-card h4.text-primary-green').innerText = `#${userRank}`;
+            document.getElementById('wallet-balance').innerText = moneyEarned;
+
+            // Render Podium (Top 3)
+            const podiumRow = document.getElementById('podium-row');
+            const top3 = players.slice(0, 3);
+            
+            // Re-order for visual podium: Rank 2, Rank 1, Rank 3
+            const visualOrder = [top3[1] || top3[0], top3[0], top3[2] || top3[0]];
+            
+            podiumRow.innerHTML = visualOrder.map((p, i) => {
+                const rankClass = i === 1 ? 'rank-1' : (i === 0 ? 'rank-2' : 'rank-3');
+                const rankNum = i === 1 ? 1 : (i === 0 ? 2 : 3);
+                const icon = i === 1 ? 'bi-crown' : 'bi-award';
+                const color = i === 1 ? 'text-warning' : (i === 0 ? 'text-secondary' : 'style="color: #cd7f32"');
+                const badgeStyle = i === 1 ? 'bg-warning' : (i === 0 ? 'bg-secondary' : 'style="background-color: #cd7f32"');
+                const scale = i === 1 ? 'style="transform: scale(1.05); z-index: 2;"' : '';
+
+                return `
+                    <div class="col-md-4 order-${i === 1 ? '1 order-md-2' : (i === 0 ? '2 order-md-1' : '3 order-md-3')}">
+                        <div class="podium-card ${rankClass} text-center h-100" ${scale}>
+                            <div class="rank-badge ${color}"><i class="bi ${icon}"></i></div>
+                            <div class="avatar-circle mx-auto mb-3 text-dark fw-bold fs-4 d-flex align-items-center justify-content-center ${badgeStyle}" style="width: ${i===1? '75':'60'}px; height: ${i===1? '75':'60'}px; border-radius: 50%;">${p.inits}</div>
+                            <h5 class="fw-bold text-white mb-1">${p.name} ${p.isUser ? '(You)' : ''}</h5>
+                            <p class="text-primary-green fw-bold mb-2 ${i===1?'fs-5':''}">${p.pts.toLocaleString()}</p>
+                            <span class="text-secondary small"><i class="bi bi-star"></i> Lv.${p.lvl}</span>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+
+            // Render Remaining List
+            const listContainer = document.getElementById('ranking-list');
+            listContainer.innerHTML = players.map((p, index) => {
+                const rank = index + 1;
+                const activeStyle = p.isUser ? 'background-color: rgba(34, 197, 94, 0.05); border-left: 4px solid var(--primary-green);' : '';
+                const crown = rank === 1 ? '<i class="bi bi-crown"></i>' : rank;
+                const crownColor = rank === 1 ? 'text-warning' : (rank === 2 ? 'text-secondary' : (rank === 3 ? 'style="color: #cd7f32"' : 'text-secondary'));
+
+                return `
+                    <div class="ranking-row d-flex align-items-center p-3 px-4 border-bottom border-light border-opacity-10" style="${activeStyle}">
+                        <div class="rank-num ${crownColor} fw-bold fs-5" style="width: 40px;">${crown}</div>
+                        <div class="avatar-circle bg-dark text-white fw-bold d-flex align-items-center justify-content-center me-3 border border-secondary border-opacity-25" style="width: 45px; height: 45px; border-radius: 50%;">${p.inits}</div>
+                        <div class="flex-grow-1">
+                            <h6 class="fw-bold mb-0 ${p.isUser ? 'text-primary-green' : 'text-white'}">${p.name} ${p.isUser ? '(You)' : ''}</h6>
+                            <span class="text-secondary small"><i class="bi bi-star"></i> Level ${p.lvl} &nbsp; <i class="bi bi-fire text-warning"></i> ${p.streak} day streak</span>
+                        </div>
+                        <div class="text-end">
+                            <h6 class="text-primary-green fw-bold mb-0">${p.pts.toLocaleString()}</h6>
+                            <span class="text-secondary" style="font-size: 0.75rem;">points</span>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+    </script>
+</body>
+</html>

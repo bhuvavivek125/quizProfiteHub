@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="theme-color" content="#0B0E14">
+    <title>QuizProfitHub | Play Quiz</title>
+    
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9574633923880115" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body { min-height: 100vh; display: flex; flex-direction: column; }
+        .quiz-card {
+            background-color: var(--card-bg);
+            border-radius: 16px;
+            padding: 24px;
+            border: 1px solid var(--border-color);
+            max-width: 600px;
+            width: 100%;
+            margin: auto;
+            position: relative;
+        }
+        .option-btn {
+            width: 100%;
+            text-align: left;
+            padding: 16px 20px;
+            margin-bottom: 14px;
+            border-radius: 12px;
+            border: 1px solid rgba(255,255,255,0.1);
+            background-color: rgba(255,255,255,0.02);
+            color: var(--text-main);
+            font-size: 1.05rem;
+            font-weight: 500;
+            transition: all 0.2s ease;
+        }
+        .option-btn:hover {
+            border-color: rgba(255,255,255,0.3);
+            background-color: rgba(255,255,255,0.05);
+        }
+        .option-btn.selected {
+            border-color: var(--primary-green);
+            background-color: rgba(34, 197, 94, 0.1);
+        }
+        .option-btn.correct {
+            background-color: #22c55e !important;
+            color: #000 !important;
+            border-color: #22c55e !important;
+        }
+        .option-btn.wrong {
+            background-color: #ef4444 !important;
+            color: #fff !important;
+            border-color: #ef4444 !important;
+        }
+        .progress-tracker {
+            display: flex; justify-content: center; gap: 8px; margin-bottom: 24px; flex-wrap: wrap;
+        }
+        .tracker-dot {
+            width: 32px; height: 32px; border-radius: 50%;
+            background: rgba(255,255,255,0.05);
+            display: flex; justify-content: center; align-items: center;
+            font-size: 12px; font-weight: bold; color: transparent;
+            border: 1px solid rgba(255,255,255,0.1);
+            transition: all 0.3s;
+        }
+        .tracker-dot.active { background: var(--primary-green); color: #000; border-color: var(--primary-green); }
+        .tracker-dot.correct { background: #22c55e; color: #000; border-color: #22c55e; }
+        .tracker-dot.wrong { background: #ef4444; color: #fff; border-color: #ef4444; }
+        .fade-in { animation: fadeIn 0.4s ease forwards; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+
+<body class="dark-theme">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-transparent pt-4 pb-4">
+        <div class="container border-bottom border-secondary border-opacity-25 pb-3">
+            <a class="navbar-brand d-flex align-items-center gap-2" href="index.html">
+                <div class="logo-icon"><i class="bi bi-lightning-charge-fill"></i></div>
+                <span class="fw-bold fs-4">QuizProfitHub</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="index.html#categories">Categories</a></li>
+                    <li class="nav-item"><a class="nav-link" href="leaderboard.html">Leaderboard</a></li>
+                    <li class="nav-item"><a class="nav-link" href="profile.html">Profile</a></li>
+                    <li class="nav-item"><a class="nav-link" href="blog.html">Blog</a></li>
+                    <li class="nav-item"><a class="nav-link" href="contact.html">Contact Us</a></li>
+                </ul>
+                <div class="d-flex align-items-center gap-3">
+                    <div class="points-badge">
+                        <i class="bi bi-trophy-fill text-warning"></i> <span id="wallet-balance">0</span>
+                    </div>
+                    <a href="profile.html" class="profile-icon text-decoration-none">
+                        <i class="bi bi-person-fill"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container flex-grow-1 d-flex flex-column py-5 align-items-center justify-content-center">
+        
+        <!-- Pre-Quiz Overview Screen -->
+        <div id="pre-quiz-screen" class="quiz-card text-center fade-in p-md-5">
+            <div class="category-icon-wrapper mx-auto mb-4 border border-secondary border-opacity-25" style="width: 80px; height: 80px; background-color: rgba(255,255,255,0.05); border-radius: 20px;">
+                <span class="fs-1" id="pre-icon">?</span>
+            </div>
+            <h2 class="fw-bold mb-3" id="pre-title">Loading...</h2>
+            <p class="text-secondary mb-4" id="pre-desc">Please wait while we prepare your quiz.</p>
+            
+            <div class="d-flex justify-content-center gap-4 mb-5 flex-wrap">
+                <span class="badge bg-dark border border-secondary border-opacity-25 px-3 py-2 fw-normal fs-6 rounded-pill"><span class="text-white" id="pre-qcount">10</span> <span class="text-secondary ms-1 fw-medium">Questions</span></span>
+                <span class="badge bg-dark border border-secondary border-opacity-25 px-3 py-2 fw-normal fs-6 rounded-pill d-flex align-items-center gap-2"><i class="bi bi-clock text-secondary"></i><span class="text-secondary fw-medium">30s per question</span></span>
+                <span class="badge bg-warning bg-opacity-10 border border-warning border-opacity-25 text-warning px-3 py-2 fs-6 rounded-pill" id="pre-diff">Medium</span>
+            </div>
+            
+            <div class="d-flex justify-content-center gap-3 flex-wrap">
+                <button class="btn btn-primary-green fw-bold px-4 py-2 rounded-pill shadow" onclick="startQuizSession()">Start Quiz <i class="bi bi-arrow-right ms-1"></i></button>
+                <a href="index.html#categories" class="btn btn-outline-light fw-bold px-4 py-2 rounded-pill">Back to Categories</a>
+            </div>
+        </div>
+
+        <!-- Main Quiz Interface -->
+        <div id="main-quiz-screen" class="quiz-card" style="display: none;">
+            <div class="d-flex justify-content-between align-items-center mb-3 border-bottom border-secondary border-opacity-25 pb-3">
+                <div class="d-flex align-items-center gap-3">
+                    <h5 class="fw-bold mb-0 d-flex align-items-center gap-2"><span id="quiz-header-icon"></span> <span id="quiz-header-title">Quiz</span></h5>
+                    <span id="timer-display" class="badge bg-danger rounded-pill px-3 py-2 fs-6 shadow-sm d-flex align-items-center gap-1" style="min-width: 80px;"><i class="bi bi-stopwatch"></i> 00:30</span>
+                </div>
+                <span class="text-secondary small fw-medium" id="question-count">Question 1 of 10</span>
+            </div>
+            
+            <div class="progress-bar-custom mb-4" style="height: 6px; background-color: rgba(255,255,255,0.05);">
+                <div id="progress-bar" class="progress-bar-fill" style="width: 10%;"></div>
+            </div>
+
+            <div id="progress-tracker" class="progress-tracker"></div>
+
+            <div id="question-fade-container" class="fade-in">
+                <h4 id="question-text" class="fw-bold mb-4 line-height-base">Loading Data...</h4>
+                <div id="options-container"></div>
+            </div>
+
+            <!-- Ad Unit -->
+            <div id="ad-slot" class="mt-4 px-2" style="display: none;">
+                <ins class="adsbygoogle" style="display:block;"
+                    data-ad-client="ca-pub-9574633923880115" data-ad-slot="4081411500" data-ad-format="auto"
+                    data-full-width-responsive="true"></ins>
+                <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+            </div>
+
+            <div class="d-flex w-100 gap-3 mt-4">
+                <button id="prev-btn" class="btn btn-outline-light fw-bold py-3 px-4 rounded-3" style="display: none; white-space: nowrap;">Previous</button>
+                <button id="next-btn" class="btn btn-primary-green fw-bold py-3 w-100 rounded-3 fs-5" disabled>Next</button>
+            </div>
+        </div>
+
+    </div>
+
+    <footer class="footer-modern">
+        <div class="container">
+            <div class="row g-4 text-start">
+                <div class="col-lg-4 footer-brand">
+                    <a class="navbar-brand d-flex align-items-center gap-2 mb-3" href="index.html">
+                        <div class="logo-icon"><i class="bi bi-lightning-charge-fill"></i></div>
+                        <span class="fw-bold fs-3 text-white">QuizProfitHub</span>
+                    </a>
+                    <p class="text-secondary small pe-lg-5">Empowering learners and quiz enthusiasts worldwide with rewarding and engaging challenges. Test your IQ and win today!</p>
+                    <div class="social-links">
+                        <a href="#" class="social-icon"><i class="bi bi-facebook"></i></a>
+                        <a href="#" class="social-icon"><i class="bi bi-twitter-x"></i></a>
+                        <a href="#" class="social-icon"><i class="bi bi-instagram"></i></a>
+                        <a href="#" class="social-icon"><i class="bi bi-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-4">
+                    <h5 class="footer-heading">Platform</h5>
+                    <ul class="footer-links-list">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="index.html#categories">Categories</a></li>
+                        <li><a href="leaderboard.html">Leaderboard</a></li>
+                        <li><a href="blog.html">Blog</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 col-md-4">
+                    <h5 class="footer-heading">Company</h5>
+                    <ul class="footer-links-list">
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="index.html#how-it-works">How it Works</a></li>
+                        <li><a href="contact.html">Contact Us</a></li>
+                        <li><a href="profile.html">My Profile</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 col-md-4">
+                    <h5 class="footer-heading">Legal Support</h5>
+                    <ul class="footer-links-list">
+                        <li><a href="privacy.html">Privacy Policy</a></li>
+                        <li><a href="terms.html">Term & Condition</a></li>
+                        <li><a href="contact.html">Help Center</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom text-center">
+                <p class="text-secondary small mb-0">&copy; 2026 QuizProfitHub. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const moneyEarned = localStorage.getItem('moneyEarned') || '0';
+            const balElement = document.getElementById('wallet-balance');
+            if(balElement) balElement.innerText = moneyEarned;
+        });
+
+        const quizDatabase = {
+            science: {
+                title: "Science", icon: "🔬", desc: "Explore the wonders of physics, chemistry, and biology", diff: "Medium", color: "warning",
+                data: [
+                    { question: "What gas do plants absorb from the atmosphere?", options: ["Oxygen", "Carbon Dioxide", "Nitrogen", "Argon"], answer: "Carbon Dioxide" },
+                    { question: "What is the chemical symbol for Gold?", options: ["Go", "Gd", "Au", "Ag"], answer: "Au" },
+                    { question: "Which planet is known as the Red Planet?", options: ["Venus", "Jupiter", "Saturn", "Mars"], answer: "Mars" },
+                    { question: "Who invented the telephone?", options: ["Thomas Edison", "Nikola Tesla", "Alexander Graham Bell", "Isaac Newton"], answer: "Alexander Graham Bell" },
+                    { question: "What is the hardest natural substance on Earth?", options: ["Iron", "Diamond", "Gold", "Platinum"], answer: "Diamond" },
+                    { question: "What is the powerhouse of the cell?", options: ["Nucleus", "Ribosome", "Mitochondria", "Lysosome"], answer: "Mitochondria" },
+                    { question: "What is the boiling point of water (Celsius)?", options: ["90°C", "100°C", "110°C", "120°C"], answer: "100°C" },
+                    { question: "Which vitamin is produced in the skin when exposed to sunlight?", options: ["Vitamin A", "Vitamin B12", "Vitamin C", "Vitamin D"], answer: "Vitamin D" },
+                    { question: "Who formulated the Laws of Motion?", options: ["Albert Einstein", "Isaac Newton", "Galileo Galilei", "Marie Curie"], answer: "Isaac Newton" },
+                    { question: "What is the common name for Sodium Chloride?", options: ["Sugar", "Salt", "Vinegar", "Baking Soda"], answer: "Salt" }
+                ]
+            },
+            gk: {
+                title: "General Knowledge", icon: "📜", desc: "Journey through time and discover world facts", diff: "Medium", color: "warning",
+                data: [
+                    { question: "Which is the largest continent in the world?", options: ["Africa", "Asia", "Europe", "North America"], answer: "Asia" },
+                    { question: "Who painted the Mona Lisa?", options: ["Van Gogh", "Picasso", "Da Vinci", "Rembrandt"], answer: "Da Vinci" },
+                    { question: "What is the capital of Australia?", options: ["Sydney", "Melbourne", "Canberra", "Perth"], answer: "Canberra" },
+                    { question: "Which ocean is the largest?", options: ["Atlantic", "Indian", "Arctic", "Pacific"], answer: "Pacific" },
+                    { question: "How many states are there in the USA?", options: ["50", "52", "48", "51"], answer: "50" },
+                    { question: "Which country is known as the Land of the Rising Sun?", options: ["China", "Japan", "South Korea", "Thailand"], answer: "Japan" },
+                    { question: "Which is the tallest building in the world?", options: ["Burj Khalifa", "Shanghai Tower", "Empire State Building", "Eiffel Tower"], answer: "Burj Khalifa" },
+                    { question: "Who is known as the Father of the Nation in India?", options: ["Subhash Chandra Bose", "Mahatma Gandhi", "Jawaharlal Nehru", "Sardar Patel"], answer: "Mahatma Gandhi" },
+                    { question: "What is the longest river in the world?", options: ["Amazon", "Nile", "Mississippi", "Yangtze"], answer: "Nile" },
+                    { question: "Which planet is closest to the Sun?", options: ["Venus", "Earth", "Mars", "Mercury"], answer: "Mercury" }
+                ]
+            },
+            math: {
+                title: "Math & Logic", icon: "💻", desc: "Test your knowledge of numbers and logical innovation", diff: "Hard", color: "danger",
+                data: [
+                    { question: "Solve: 5 + 5 × 5 = ?", options: ["50", "30", "25", "20"], answer: "30" },
+                    { question: "What is the square root of 144?", options: ["10", "12", "14", "16"], answer: "12" },
+                    { question: "100 divided by half, plus 20 is?", options: ["70", "220", "20", "120"], answer: "220" },
+                    { question: "Which number is prime?", options: ["15", "21", "29", "33"], answer: "29" },
+                    { question: "What is 15% of 200?", options: ["30", "45", "15", "20"], answer: "30" },
+                    { question: "What is 7 multiplied by 8?", options: ["54", "56", "48", "64"], answer: "56" },
+                    { question: "What is the next number in sequence: 2, 4, 8, 16, _?", options: ["20", "24", "32", "64"], answer: "32" },
+                    { question: "How many degrees are in a right angle?", options: ["45°", "90°", "180°", "360°"], answer: "90°" },
+                    { question: "What is the value of Pi (to 2 decimal places)?", options: ["3.12", "3.16", "3.14", "3.18"], answer: "3.14" },
+                    { question: "If a rectangle has length 5 and width 3, what is its area?", options: ["15", "8", "20", "16"], answer: "15" }
+                ]
+            },
+            sports: {
+                title: "Sports", icon: "⚽", desc: "Challenge your sports knowledge from around the globe", diff: "Medium", color: "warning",
+                data: [
+                    { question: "Which country won the first ICC Cricket World Cup?", options: ["Australia", "India", "West Indies", "England"], answer: "West Indies" },
+                    { question: "How many players are on a standard soccer team?", options: ["10", "11", "12", "9"], answer: "11" },
+                    { question: "Who holds the record for the most Olympic gold medals?", options: ["Usain Bolt", "Michael Phelps", "Carl Lewis", "Mark Spitz"], answer: "Michael Phelps" },
+                    { question: "In which sport would you perform a 'slam dunk'?", options: ["Tennis", "Basketball", "Volleyball", "Baseball"], answer: "Basketball" },
+                    { question: "What is the national sport of Canada?", options: ["Ice Hockey", "Lacrosse", "Curling", "Both A and B"], answer: "Both A and B" },
+                    { question: "Cristiano Ronaldo is associated with which sport?", options: ["Tennis", "Soccer", "Cricket", "Basketball"], answer: "Soccer" },
+                    { question: "The term 'Grand Slam' is associated with which sport?", options: ["Golf", "Tennis", "Chess", "Polo"], answer: "Tennis" },
+                    { question: "Who won the FIFA World Cup 2022?", options: ["France", "Argentina", "Brazil", "Germany"], answer: "Argentina" },
+                    { question: "What is the length of a professional marathon (km)?", options: ["21.1", "42.2", "10", "35.5"], answer: "42.2" },
+                    { question: "In which city were the first modern Olympics held?", options: ["Paris", "London", "Athens", "Rome"], answer: "Athens" }
+                ]
+            },
+            bollywood: {
+                title: "Entertainment", icon: "🎬", desc: "Movies, music, TV shows and pop culture trivia", diff: "Easy", color: "success",
+                data: [
+                    { question: "Who is known as the 'Badshah of Bollywood'?", options: ["Salman Khan", "Aamir Khan", "Shah Rukh Khan", "Akshay Kumar"], answer: "Shah Rukh Khan" },
+                    { question: "Which movie holds the record for highest grosser worldwide among older classics?", options: ["Sholay", "Mughal-E-Azam", "Dilwale Dulhania Le Jayenge", "Dangal"], answer: "Dangal" },
+                    { question: "Who directed '3 Idiots'?", options: ["Karan Johar", "Rajkumar Hirani", "Sanjay Leela Bhansali", "Rohit Shetty"], answer: "Rajkumar Hirani" },
+                    { question: "Which actress was known as the 'Hawa Hawai' girl?", options: ["Madhuri Dixit", "Sridevi", "Juhi Chawla", "Rekha"], answer: "Sridevi" },
+                    { question: "In 'Sholay', what was the name of Basanti’s horse?", options: ["Chetak", "Dhanno", "Badal", "Shera"], answer: "Dhanno" },
+                    { question: "Which is the highest-grossing film of all time?", options: ["Titanic", "Avatar", "Avengers: Endgame", "Star Wars"], answer: "Avatar" },
+                    { question: "Who played the character of Iron Man in the MCU?", options: ["Chris Evans", "Mark Ruffalo", "Robert Downey Jr.", "Chris Hemsworth"], answer: "Robert Downey Jr." },
+                    { question: "Who is known as the 'King of Pop'?", options: ["Elvis Presley", "Michael Jackson", "Freddie Mercury", "Prince"], answer: "Michael Jackson" },
+                    { question: "Which series features the character Sheldon Cooper?", options: ["Friends", "The Office", "The Big Bang Theory", "Suits"], answer: "The Big Bang Theory" },
+                    { question: "Who won the Oscar for Best Picture in the very first academy awards?", options: ["Wings", "Sunrise", "Seventh Heaven", "The Circus"], answer: "Wings" }
+                ]
+            }
+        };
+
+        const categoryId = localStorage.getItem('selectedCategory') || 'gk';
+        const activeCategory = quizDatabase[categoryId] || quizDatabase['gk'];
+
+        // Hydrate Pre-Quiz UI
+        document.getElementById('pre-icon').innerText = activeCategory.icon;
+        document.getElementById('pre-title').innerText = activeCategory.title;
+        document.getElementById('pre-desc').innerText = activeCategory.desc;
+        document.getElementById('pre-qcount').innerText = "10";
+        
+        const diffBadge = document.getElementById('pre-diff');
+        diffBadge.innerText = activeCategory.diff;
+        diffBadge.className = `badge bg-${activeCategory.color} bg-opacity-10 border border-${activeCategory.color} border-opacity-25 text-${activeCategory.color} px-3 py-2 fs-6 rounded-pill`;
+
+        document.getElementById('quiz-header-icon').innerText = activeCategory.icon;
+        document.getElementById('quiz-header-title').innerText = activeCategory.title;
+
+        // Shuffle logic
+        function shuffleArray(array) {
+            let cur = array.length, rnd;
+            while (cur != 0) {
+                rnd = Math.floor(Math.random() * cur); cur--;
+                [array[cur], array[rnd]] = [array[rnd], array[cur]];
+            }
+            return array;
+        }
+
+        const quizData = shuffleArray([...activeCategory.data]).slice(0, 10);
+        let currentQuestionIndex = 0;
+        let score = 0;
+        let userAnswers = {};
+        
+        let timerInterval;
+        let secondsLeft = 30;
+
+        const questionText = document.getElementById('question-text');
+        const optionsContainer = document.getElementById('options-container');
+        const nextBtn = document.getElementById('next-btn');
+        const progressCount = document.getElementById('question-count');
+        const progressBar = document.getElementById('progress-bar');
+        const fadeContainer = document.getElementById('question-fade-container');
+        const adSlot = document.getElementById('ad-slot');
+        const timerDisplay = document.getElementById('timer-display');
+
+        function startQuizSession() {
+            document.getElementById('pre-quiz-screen').style.display = 'none';
+            document.getElementById('main-quiz-screen').style.display = 'block';
+            
+            // Render tracker
+            const trackerContainer = document.getElementById('progress-tracker');
+            trackerContainer.innerHTML = ''; // reset just in case
+            for (let i = 0; i < quizData.length; i++) {
+                const dot = document.createElement('div');
+                dot.className = 'tracker-dot';
+                dot.id = 'dot-' + i;
+                trackerContainer.appendChild(dot);
+            }
+            loadQuestion();
+        }
+
+        function updateTimerDisplay() {
+            if(!timerDisplay) return;
+            const s = secondsLeft < 10 ? '0' + secondsLeft : secondsLeft;
+            timerDisplay.innerHTML = `<i class="bi bi-stopwatch"></i> 00:${s}`;
+        }
+
+        function autoFailQuestion() {
+            if (!userAnswers[currentQuestionIndex]) {
+                userAnswers[currentQuestionIndex] = {
+                    selected: null,
+                    correctAns: quizData[currentQuestionIndex].answer,
+                    isCorrect: false
+                };
+                
+                const dot = document.getElementById('dot-' + currentQuestionIndex);
+                if (dot) {
+                    dot.innerText = '✖';
+                    dot.classList.remove('active');
+                    dot.classList.add('wrong');
+                }
+                
+                Array.from(optionsContainer.children).forEach(btn => {
+                    btn.style.pointerEvents = 'none';
+                    if (btn.innerText === quizData[currentQuestionIndex].answer) btn.classList.add('correct');
+                });
+                
+                nextBtn.disabled = false;
+                timerDisplay.classList.replace('bg-danger', 'bg-dark');
+                timerDisplay.innerHTML = `<i class="bi bi-x-circle text-danger"></i> Time Up`;
+            }
+        }
+
+        function loadQuestion() {
+            clearInterval(timerInterval);
+            
+            if (userAnswers[currentQuestionIndex]) {
+                if(timerDisplay) {
+                    timerDisplay.classList.replace('bg-danger', 'bg-dark');
+                    timerDisplay.innerHTML = `<i class="bi bi-check-circle text-success"></i> Answered`;
+                }
+            } else {
+                secondsLeft = 30;
+                if(timerDisplay) {
+                    timerDisplay.classList.replace('bg-dark', 'bg-danger');
+                }
+                updateTimerDisplay();
+                
+                timerInterval = setInterval(() => {
+                    secondsLeft--;
+                    updateTimerDisplay();
+                    if(secondsLeft <= 0) {
+                        clearInterval(timerInterval);
+                        autoFailQuestion();
+                    }
+                }, 1000);
+            }
+
+            fadeContainer.classList.remove('fade-in');
+            void fadeContainer.offsetWidth; // trigger reflow
+            fadeContainer.classList.add('fade-in');
+
+            const prevBtn = document.getElementById('prev-btn');
+            if (currentQuestionIndex > 0) {
+                prevBtn.style.display = 'block';
+            } else {
+                prevBtn.style.display = 'none';
+            }
+
+            // Sync tracker
+            for (let i = 0; i < quizData.length; i++) {
+                const dot = document.getElementById('dot-' + i);
+                if (dot) {
+                    dot.classList.remove('active');
+                    if (i === currentQuestionIndex && !userAnswers[i]) {
+                        dot.classList.add('active');
+                        // No number inside dot, wait, yes if we want, or leave clean UI.
+                        dot.innerText = i + 1;
+                    } else if (!userAnswers[i]) {
+                        dot.innerText = '';
+                    }
+                }
+            }
+
+            const currentQ = quizData[currentQuestionIndex];
+            questionText.innerText = currentQ.question;
+            progressCount.innerText = `Question ${currentQuestionIndex + 1} of ${quizData.length}`;
+            progressBar.style.width = (((currentQuestionIndex + 1) / quizData.length) * 100) + "%";
+
+            optionsContainer.innerHTML = '';
+            const randomizedOptions = shuffleArray([...currentQ.options]);
+
+            randomizedOptions.forEach(opt => {
+                const btn = document.createElement('button');
+                btn.className = 'option-btn';
+                btn.innerText = opt;
+                btn.onclick = () => selectOption(btn, opt);
+                optionsContainer.appendChild(btn);
+            });
+
+            nextBtn.disabled = true;
+            nextBtn.innerText = currentQuestionIndex === quizData.length - 1 ? "Submit Quiz" : "Next";
+
+            if (userAnswers[currentQuestionIndex]) {
+                const ansData = userAnswers[currentQuestionIndex];
+                Array.from(optionsContainer.children).forEach(btn => {
+                    btn.style.pointerEvents = 'none';
+                    if (btn.innerText === ansData.correctAns) btn.classList.add('correct');
+                    else if (btn.innerText === ansData.selected && !ansData.isCorrect) btn.classList.add('wrong');
+                });
+                nextBtn.disabled = false;
+            }
+        }
+
+        function selectOption(selectedBtn, selectedValue) {
+            const options = document.querySelectorAll('.option-btn');
+            options.forEach(btn => btn.classList.remove('selected'));
+            selectedBtn.classList.add('selected');
+            selectedBtn.setAttribute('data-value', selectedValue);
+            nextBtn.disabled = false;
+        }
+
+        nextBtn.addEventListener('click', () => {
+            clearInterval(timerInterval);
+            
+            if (!userAnswers[currentQuestionIndex]) {
+                const selectedBtn = document.querySelector('.option-btn.selected');
+                if (!selectedBtn) return;
+                const selectedAnswer = selectedBtn.getAttribute('data-value');
+                const isCorrect = (selectedAnswer === quizData[currentQuestionIndex].answer);
+                if (isCorrect) {
+                     score++;
+                     let totalEarned = parseInt(localStorage.getItem('moneyEarned') || '0');
+                     localStorage.setItem('moneyEarned', totalEarned + 10);
+                }
+
+                userAnswers[currentQuestionIndex] = {
+                    selected: selectedAnswer,
+                    correctAns: quizData[currentQuestionIndex].answer,
+                    isCorrect: isCorrect
+                };
+
+                const dot = document.getElementById('dot-' + currentQuestionIndex);
+                if (dot) {
+                    dot.innerText = isCorrect ? '✔' : '✖';
+                    dot.classList.remove('active');
+                    if (isCorrect) dot.classList.add('correct');
+                    else dot.classList.add('wrong');
+                }
+            }
+
+            currentQuestionIndex++;
+
+            if (currentQuestionIndex === 2 || currentQuestionIndex === 4) {
+                adSlot.style.display = 'block';
+            } else {
+                adSlot.style.display = 'none';
+            }
+
+            if (currentQuestionIndex < quizData.length) {
+                loadQuestion();
+            } else {
+                finishQuiz();
+            }
+        });
+
+        document.getElementById('prev-btn').addEventListener('click', () => {
+            if (currentQuestionIndex > 0) {
+                currentQuestionIndex--;
+                loadQuestion();
+            }
+        });
+
+        function finishQuiz() {
+            localStorage.setItem('quizScore', score);
+            localStorage.setItem('totalQuestions', quizData.length);
+            localStorage.setItem('quizTopic', activeCategory.title + " Quiz");
+            
+            // Fake loading experience inside quiz-card
+            const wrapper = document.getElementById('main-quiz-screen');
+            wrapper.innerHTML = `
+                <div class="py-5 text-center">
+                    <div class="spinner-border text-primary-green mb-4" style="width: 3rem; height: 3rem;" role="status"></div>
+                    <h3 class="fw-bold">Evaluating Answers...</h3>
+                    <p class="text-secondary small">Please wait</p>
+                </div>
+            `;
+            setTimeout(() => { window.location.href = 'result.html'; }, 1500);
+        }
+    </script>
+</body>
+</html>

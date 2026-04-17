@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QuizProfitHub | Profile</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="style.css">
+    <!-- SweetAlert2 for Modern Alerts -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+
+<body class="dark-theme">
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-transparent pt-4 pb-4">
+        <div class="container border-bottom border-secondary border-opacity-25 pb-3">
+            <a class="navbar-brand d-flex align-items-center gap-2" href="index.html">
+                <div class="logo-icon"><i class="bi bi-lightning-charge-fill"></i></div>
+                <span class="fw-bold fs-4">QuizProfitHub</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="index.html#categories">Categories</a></li>
+                    <li class="nav-item"><a class="nav-link" href="leaderboard.html">Leaderboard</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="profile.html">Profile</a></li>
+                    <li class="nav-item"><a class="nav-link" href="blog.html">Blog</a></li>
+                    <li class="nav-item"><a class="nav-link" href="contact.html">Contact Us</a></li>
+                </ul>
+                <div class="d-flex align-items-center gap-3">
+                    <div class="points-badge">
+                        <i class="bi bi-trophy-fill text-warning"></i> <span id="wallet-balance">0</span>
+                    </div>
+                    <a href="profile.html" class="profile-icon text-decoration-none">
+                        <i class="bi bi-person-fill"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Profile Content -->
+    <div class="container py-4">
+
+        <!-- Profile Top Ad -->
+        <div class="mb-4 text-center">
+            <script async
+                src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9574633923880115"
+                crossorigin="anonymous"></script>
+            <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-9574633923880115"
+                data-ad-slot="4081411500" data-ad-format="auto" data-full-width-responsive="true"></ins>
+            <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+        </div>
+
+        <!-- Player Header Card -->
+        <div class="ranking-card mb-4 p-4 p-md-5">
+            <div
+                class="d-flex flex-column flex-md-row align-items-start align-items-md-center justify-content-between gap-4">
+                <div class="d-flex align-items-center gap-4">
+                    <div class="avatar-circle bg-success text-dark fw-bold fs-2 d-flex align-items-center justify-content-center"
+                        id="user-initials" style="width: 100px; height: 100px; border-radius: 50%;">PL</div>
+                    <div>
+                        <div class="d-flex align-items-center gap-2 mb-1">
+                            <h2 class="fw-bold mb-0" id="user-display-name">Player</h2>
+                            <i class="bi bi-pencil text-secondary" style="cursor: pointer;" onclick="editName()"></i>
+                        </div>
+                        <p class="text-secondary mb-4">Quiz Enthusiast</p>
+
+                        <div style="min-width: 250px;">
+                            <div class="d-flex justify-content-between mb-2">
+                                <span class="fw-bold" id="level-display text-white">Level 1</span>
+                                <span class="text-secondary small" id="xp-text">0 / 500 XP</span>
+                            </div>
+                            <div class="progress-bar-custom mb-2">
+                                <div class="progress-bar-fill" id="xp-progress" style="width: 0%;"></div>
+                            </div>
+                            <span class="text-secondary small" id="xp-needed">500 XP to Level 2</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="d-flex mt-3 mt-md-0 w-100 w-md-auto justify-content-end">
+                    <a href="index.html#categories" class="btn btn-primary-green px-4 fw-bold rounded-pill">Play Quiz <i
+                            class="bi bi-controller ms-2"></i></a>
+                </div>
+            </div>
+        </div>
+
+        <!-- 4 Stat Cards -->
+        <div class="row g-4 mb-5">
+            <div class="col-md-3 col-6">
+                <div class="stat-card">
+                    <div class="d-flex justify-content-between align-items-start mb-2">
+                        <span class="text-secondary small fw-medium">Total Points</span>
+                        <div class="stat-icon bg-success bg-opacity-10 text-success"><i class="bi bi-trophy"></i></div>
+                    </div>
+                    <h3 class="fw-bold mb-1" id="stat-points">0</h3>
+                </div>
+            </div>
+            <div class="col-md-3 col-6">
+                <div class="stat-card">
+                    <div class="d-flex justify-content-between align-items-start mb-2">
+                        <span class="text-secondary small fw-medium">Current Streak</span>
+                        <div class="stat-icon bg-success bg-opacity-10 text-success"><i class="bi bi-fire"></i></div>
+                    </div>
+                    <h3 class="fw-bold mb-1" id="stat-streak">0 days</h3>
+                    <span class="text-secondary small" id="stat-best-streak">Best: 0 days</span>
+                </div>
+            </div>
+            <div class="col-md-3 col-6">
+                <div class="stat-card">
+                    <div class="d-flex justify-content-between align-items-start mb-2">
+                        <span class="text-secondary small fw-medium">Average Accuracy</span>
+                        <div class="stat-icon bg-success bg-opacity-10 text-success"><i class="bi bi-bullseye"></i>
+                        </div>
+                    </div>
+                    <h3 class="fw-bold mb-1" id="stat-accuracy">0%</h3>
+                    <span class="text-secondary small" id="stat-correct-ratio">0/0 correct</span>
+                </div>
+            </div>
+            <div class="col-md-3 col-6">
+                <div class="stat-card">
+                    <div class="d-flex justify-content-between align-items-start mb-2">
+                        <span class="text-secondary small fw-medium">Total Quizzes</span>
+                        <div class="stat-icon bg-success bg-opacity-10 text-success"><i class="bi bi-pencil-square"></i>
+                        </div>
+                    </div>
+                    <h3 class="fw-bold mb-1" id="stat-quizzes">0</h3>
+                    <span class="text-secondary small">Quizzes taken</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row g-4">
+            <!-- Achievements -->
+            <div class="col-lg-7">
+                <div class="ranking-card h-100 p-4">
+                    <div
+                        class="d-flex justify-content-between align-items-center border-bottom border-secondary border-opacity-25 pb-3 mb-4">
+                        <h5 class="fw-bold mb-0 d-flex align-items-center gap-2"><i
+                                class="bi bi-award text-primary-green"></i> Achievements</h5>
+                        <span class="text-secondary small text-end">0/10 unlocked</span>
+                    </div>
+
+                    <div class="row g-3">
+                        <div class="col-4">
+                            <div class="achievement-card locked">
+                                <div class="achievement-icon text-danger">🎯</div>
+                                <h6 class="fw-bold mb-1 small">First Steps</h6>
+                                <p class="text-secondary mb-0" style="font-size: 0.7rem;">Complete your first quiz</p>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="achievement-card locked">
+                                <div class="achievement-icon text-warning">⭐</div>
+                                <h6 class="fw-bold mb-1 small">Perfectionist</h6>
+                                <p class="text-secondary mb-0" style="font-size: 0.7rem;">Score 100% on any quiz</p>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="achievement-card locked">
+                                <div class="achievement-icon text-warning">🏆</div>
+                                <h6 class="fw-bold mb-1 small">Quiz Master</h6>
+                                <p class="text-secondary mb-0" style="font-size: 0.7rem;">Complete 10 quizzes</p>
+                            </div>
+                        </div>
+
+                        <div class="col-4">
+                            <div class="achievement-card locked">
+                                <div class="achievement-icon text-danger">🔥</div>
+                                <h6 class="fw-bold mb-1 small">On Fire</h6>
+                                <p class="text-secondary mb-0" style="font-size: 0.7rem;">Maintain a 3-day streak</p>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="achievement-card locked">
+                                <div class="achievement-icon text-warning">💪</div>
+                                <h6 class="fw-bold mb-1 small">Week Warrior</h6>
+                                <p class="text-secondary mb-0" style="font-size: 0.7rem;">Maintain a 7-day streak</p>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="achievement-card locked">
+                                <div class="achievement-icon text-success">💰</div>
+                                <h6 class="fw-bold mb-1 small">Point Collector</h6>
+                                <p class="text-secondary mb-0" style="font-size: 0.7rem;">Earn 1,000 total points</p>
+                            </div>
+                        </div>
+
+                        <div class="col-4">
+                            <div class="achievement-card locked">
+                                <div class="achievement-icon text-info">💎</div>
+                                <h6 class="fw-bold mb-1 small">High Roller</h6>
+                                <p class="text-secondary mb-0" style="font-size: 0.7rem;">Earn 5,000 total points</p>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="achievement-card locked">
+                                <div class="achievement-icon text-warning">🌟</div>
+                                <h6 class="fw-bold mb-1 small">Rising Star</h6>
+                                <p class="text-secondary mb-0" style="font-size: 0.7rem;">Reach Level 5</p>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="achievement-card locked">
+                                <div class="achievement-icon text-warning">👑</div>
+                                <h6 class="fw-bold mb-1 small">Quiz Legend</h6>
+                                <p class="text-secondary mb-0" style="font-size: 0.7rem;">Reach Level 10</p>
+                            </div>
+                        </div>
+
+                        <div class="col-4">
+                            <div class="achievement-card locked">
+                                <div class="achievement-icon text-info">🗺️</div>
+                                <h6 class="fw-bold mb-1 small">Explorer</h6>
+                                <p class="text-secondary mb-0" style="font-size: 0.7rem;">Play quizzes in all categories
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Category Progress -->
+            <div class="col-lg-5">
+                <div class="ranking-card h-100 p-4">
+                    <div class="border-bottom border-secondary border-opacity-25 pb-3 mb-4">
+                        <h5 class="fw-bold mb-0 d-flex align-items-center gap-2"><i
+                                class="bi bi-bar-chart-fill text-primary-green"></i> Category Progress</h5>
+                    </div>
+                    <div class="d-flex flex-column gap-3">
+                        <div class="d-flex justify-content-between align-items-center p-3 rounded"
+                            style="background-color: rgba(255, 255, 255, 0.02)">
+                            <div class="d-flex align-items-center gap-3">
+                                <span class="fs-5">🔬</span>
+                                <span class="fw-bold">Science</span>
+                            </div>
+                            <span class="text-secondary small" id="played-science">0 played</span>
+                        </div>
+
+                        <div class="d-flex justify-content-between align-items-center p-3 rounded"
+                            style="background-color: rgba(255, 255, 255, 0.02)">
+                            <div class="d-flex align-items-center gap-3">
+                                <span class="fs-5">📜</span>
+                                <span class="fw-bold">History / GK</span>
+                            </div>
+                            <span class="text-secondary small" id="played-history___gk">0 played</span>
+                        </div>
+
+                        <div class="d-flex justify-content-between align-items-center p-3 rounded"
+                            style="background-color: rgba(255, 255, 255, 0.02)">
+                            <div class="d-flex align-items-center gap-3">
+                                <span class="fs-5">💻</span>
+                                <span class="fw-bold">Technology / Math</span>
+                            </div>
+                            <span class="text-secondary small" id="played-technology___math">0 played</span>
+                        </div>
+
+                        <div class="d-flex justify-content-between align-items-center p-3 rounded"
+                            style="background-color: rgba(255, 255, 255, 0.02)">
+                            <div class="d-flex align-items-center gap-3">
+                                <span class="fs-5">🌎</span>
+                                <span class="fw-bold">Geography</span>
+                            </div>
+                            <span class="text-secondary small" id="played-geography">0 played</span>
+                        </div>
+
+                        <div class="d-flex justify-content-between align-items-center p-3 rounded"
+                            style="background-color: rgba(255, 255, 255, 0.02)">
+                            <div class="d-flex align-items-center gap-3">
+                                <span class="fs-5">⚽</span>
+                                <span class="fw-bold">Sports</span>
+                            </div>
+                            <span class="text-secondary small" id="played-sports">0 played</span>
+                        </div>
+
+                        <div class="d-flex justify-content-between align-items-center p-3 rounded"
+                            style="background-color: rgba(255, 255, 255, 0.02)">
+                            <div class="d-flex align-items-center gap-3">
+                                <span class="fs-5">🎬</span>
+                                <span class="fw-bold">Entertainment</span>
+                            </div>
+                            <span class="text-secondary small" id="played-entertainment">0 played</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer-modern">
+        <div class="container">
+            <div class="row g-4 text-start">
+                <div class="col-lg-4 footer-brand">
+                    <a class="navbar-brand d-flex align-items-center gap-2 mb-3" href="index.html">
+                        <div class="logo-icon"><i class="bi bi-lightning-charge-fill"></i></div>
+                        <span class="fw-bold fs-3 text-white">QuizProfitHub</span>
+                    </a>
+                    <p class="text-secondary small pe-lg-5">Empowering learners and quiz enthusiasts worldwide with
+                        rewarding and engaging challenges. Test your IQ and win today!</p>
+                    <div class="social-links">
+                        <a href="#" class="social-icon"><i class="bi bi-facebook"></i></a>
+                        <a href="#" class="social-icon"><i class="bi bi-twitter-x"></i></a>
+                        <a href="#" class="social-icon"><i class="bi bi-instagram"></i></a>
+                        <a href="#" class="social-icon"><i class="bi bi-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-4">
+                    <h5 class="footer-heading">Platform</h5>
+                    <ul class="footer-links-list">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="index.html#categories">Categories</a></li>
+                        <li><a href="leaderboard.html">Leaderboard</a></li>
+                        <li><a href="blog.html">Blog</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 col-md-4">
+                    <h5 class="footer-heading">Company</h5>
+                    <ul class="footer-links-list">
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="index.html#how-it-works">How it Works</a></li>
+                        <li><a href="contact.html">Contact Us</a></li>
+                        <li><a href="profile.html">My Profile</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 col-md-4">
+                    <h5 class="footer-heading">Legal Support</h5>
+                    <ul class="footer-links-list">
+                        <li><a href="privacy.html">Privacy Policy</a></li>
+                        <li><a href="terms.html">Term & Condition</a></li>
+                        <li><a href="help.html">Help Center</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom text-center">
+                <p class="text-secondary small mb-0">&copy; 2026 QuizProfitHub. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            loadUserProfile();
+        });
+
+        function loadUserProfile() {
+            // User Appearance
+            const savedName = localStorage.getItem('userName') || 'Player';
+            document.getElementById('user-display-name').innerText = savedName;
+            document.getElementById('user-initials').innerText = savedName.substring(0, 2).toUpperCase();
+
+            // General Stats
+            const moneyEarned = parseInt(localStorage.getItem('moneyEarned') || '0');
+            const totalCorrect = parseInt(localStorage.getItem('totalCorrect') || '0');
+            const totalPlayed = parseInt(localStorage.getItem('totalQuestionsPlayed') || '0');
+            const quizzesCount = parseInt(localStorage.getItem('quizzesCompleted') || '0');
+            const xp = parseInt(localStorage.getItem('xp') || '0');
+            const streak = parseInt(localStorage.getItem('streak') || '0');
+            const bestStreak = parseInt(localStorage.getItem('bestStreak') || '0');
+
+            // Update Header & Icons
+            document.getElementById('wallet-balance').innerText = moneyEarned;
+            document.getElementById('stat-points').innerText = moneyEarned;
+            document.getElementById('stat-quizzes').innerText = quizzesCount;
+            document.getElementById('stat-streak').innerText = `${streak} days`;
+            document.getElementById('stat-best-streak').innerText = `Best: ${bestStreak} days`;
+
+            // Calculate Accuracy
+            const accuracy = totalPlayed === 0 ? 0 : Math.round((totalCorrect / totalPlayed) * 100);
+            document.getElementById('stat-accuracy').innerText = `${accuracy}%`;
+            document.getElementById('stat-correct-ratio').innerText = `${totalCorrect}/${totalPlayed} correct`;
+
+            // XP & Level Logic
+            const level = Math.floor(xp / 500) + 1;
+            const currentXP = xp % 500;
+            const progressPercent = (currentXP / 500) * 100;
+
+            const levelDisplays = document.querySelectorAll('[id^="level-display"]');
+            levelDisplays.forEach(el => el.innerText = `Level ${level}`);
+
+            document.getElementById('xp-text').innerText = `${currentXP} / 500 XP`;
+            document.getElementById('xp-progress').style.width = `${progressPercent}%`;
+            document.getElementById('xp-needed').innerText = `${500 - currentXP} XP to Level ${level + 1}`;
+
+            // Category Progress
+            const categories = ['science', 'history___gk', 'technology___math', 'geography', 'sports', 'entertainment'];
+            categories.forEach(cat => {
+                const count = localStorage.getItem(`played_${cat}`) || '0';
+                const el = document.getElementById(`played-${cat}`);
+                if (el) el.innerText = `${count} played`;
+            });
+
+            // Achievements Logic
+            checkAchievements(moneyEarned, quizzesCount, streak, level, categories);
+        }
+
+        function checkAchievements(points, quizzes, streak, level, categories) {
+            let unlockedCount = 0;
+            const list = [
+                { id: 'first_steps', check: quizzes >= 1 },
+                { id: 'perfectionist', check: localStorage.getItem('max_accuracy') === '100' },
+                { id: 'quiz_master', check: quizzes >= 10 },
+                { id: 'on_fire', check: streak >= 3 },
+                { id: 'week_warrior', check: streak >= 7 },
+                { id: 'point_collector', check: points >= 1000 },
+                { id: 'high_roller', check: points >= 5000 },
+                { id: 'rising_star', check: level >= 5 },
+                { id: 'quiz_legend', check: level >= 10 },
+                { id: 'explorer', check: categories.every(cat => parseInt(localStorage.getItem(`played_${cat}`) || '0') >= 1) }
+            ];
+
+            // Mapping achievements to their respective indices (approximate order in HTML)
+            const cards = document.querySelectorAll('.achievement-card');
+            list.forEach((item, index) => {
+                if (item.check && cards[index]) {
+                    cards[index].classList.remove('locked');
+                    unlockedCount++;
+                }
+            });
+
+            document.querySelector('.ranking-card span.text-end').innerText = `${unlockedCount}/10 unlocked`;
+        }
+
+        function editName() {
+            Swal.fire({
+                title: 'What is your name?',
+                input: 'text',
+                inputPlaceholder: 'Enter your name...',
+                showCancelButton: true,
+                confirmButtonColor: '#22c55e',
+                cancelButtonColor: '#ef4444',
+                background: '#1a1d24',
+                color: '#ffffff',
+                preConfirm: (name) => {
+                    if (!name) {
+                        Swal.showValidationMessage('Name is required!');
+                    }
+                    return name;
+                }
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    localStorage.setItem('userName', result.value);
+                    loadUserProfile();
+                }
+            });
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QuizProfitHub | Terms & Conditions</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link href="style.css" rel="stylesheet">
+    <style>
+        .terms-content-card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        .terms-section {
+            padding-left: 20px;
+            border-left: 2px solid rgba(255,255,255,0.05);
+            margin-bottom: 35px;
+            transition: all 0.3s ease;
+        }
+        .terms-section:hover {
+            border-left-color: var(--primary-green);
+            background: rgba(34, 197, 94, 0.02);
+        }
+        .terms-section h3 {
+            color: white;
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+        .terms-section p {
+            color: var(--text-muted);
+            line-height: 1.7;
+            font-size: 0.95rem;
+        }
+    </style>
+</head>
+<body class="dark-theme">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-transparent pt-4 pb-4">
+        <div class="container border-bottom border-secondary border-opacity-25 pb-3">
+            <a class="navbar-brand d-flex align-items-center gap-2" href="index.html">
+                <div class="logo-icon"><i class="bi bi-lightning-charge-fill"></i></div>
+                <span class="fw-bold fs-4">QuizProfitHub</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="index.html#categories">Categories</a></li>
+                    <li class="nav-item"><a class="nav-link" href="leaderboard.html">Leaderboard</a></li>
+                    <li class="nav-item"><a class="nav-link" href="profile.html">Profile</a></li>
+                    <li class="nav-item"><a class="nav-link" href="blog.html">Blog</a></li>
+                    <li class="nav-item"><a class="nav-link" href="contact.html">Contact Us</a></li>
+                </ul>
+                <div class="d-flex align-items-center gap-3">
+                    <div class="points-badge">
+                        <i class="bi bi-trophy-fill text-warning"></i> <span id="wallet-balance">0</span>
+                    </div>
+                    <a href="profile.html" class="profile-icon text-decoration-none">
+                        <i class="bi bi-person-fill"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container py-5 mt-4">
+        <div class="text-center mb-5">
+            <h1 class="display-4 fw-800 text-white mb-2">Terms & <span class="text-primary-green">Conditions</span></h1>
+            <p class="text-secondary">Please read these rules carefully before using our platform.</p>
+        </div>
+
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                <div class="terms-content-card">
+                    <div class="terms-section">
+                        <h3>1. Acceptance of Terms</h3>
+                        <p>By accessing and using QuizProfitHub, you agree to be bound by these Terms and Conditions. If you do not agree with any part of these terms, you must not use our platform.</p>
+                    </div>
+
+                    <div class="terms-section">
+                        <h3>2. User Accounts & Fair Play</h3>
+                        <p>Users are expected to maintain fair play. Any use of bots, automated scripts, or cheating during quizzes will result in a permanent ban and forfeiture of all points earned.</p>
+                    </div>
+
+                    <div class="terms-section">
+                        <h3>3. Reward System</h3>
+                        <p>Our points and reward system is designed for engagement and entertainment purposes. We reserve the right to modify point values or reward distribution at any time without prior notice.</p>
+                    </div>
+
+                    <div class="terms-section">
+                        <h3>4. Intellectual Property</h3>
+                        <p>All content on this platform, including quiz questions, designs, and logos, is the property of QuizProfitHub. You may not reproduce or distribute this content without our explicit permission.</p>
+                    </div>
+
+                    <div class="terms-section">
+                        <h3>5. Limitation of Liability</h3>
+                        <p>QuizProfitHub is not liable for any data loss, account issues, or personal dissatisfaction arising from the use of our gaming platform.</p>
+                    </div>
+
+                    <div class="bg-dark p-4 rounded-4 mt-5 border border-secondary border-opacity-25 text-center">
+                        <h5 class="fw-bold mb-3">Accepting the Rules?</h5>
+                        <p class="text-secondary small mb-0">By continuing to play on QuizProfitHub, you automatically accept our latest terms and conditions.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer-modern">
+        <div class="container">
+            <div class="row g-4 text-start">
+                <div class="col-lg-4 footer-brand">
+                    <a class="navbar-brand d-flex align-items-center gap-2 mb-3" href="index.html">
+                        <div class="logo-icon"><i class="bi bi-lightning-charge-fill"></i></div>
+                        <span class="fw-bold fs-3 text-white">QuizProfitHub</span>
+                    </a>
+                    <p class="text-secondary small pe-lg-5">Empowering learners and quiz enthusiasts worldwide with rewarding and engaging challenges. Test your IQ and win today!</p>
+                    <div class="social-links">
+                        <a href="#" class="social-icon"><i class="bi bi-facebook"></i></a>
+                        <a href="#" class="social-icon"><i class="bi bi-twitter-x"></i></a>
+                        <a href="#" class="social-icon"><i class="bi bi-instagram"></i></a>
+                        <a href="#" class="social-icon"><i class="bi bi-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-4">
+                    <h5 class="footer-heading">Platform</h5>
+                    <ul class="footer-links-list">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="index.html#categories">Categories</a></li>
+                        <li><a href="leaderboard.html">Leaderboard</a></li>
+                        <li><a href="blog.html">Blog</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 col-md-4">
+                    <h5 class="footer-heading">Company</h5>
+                    <ul class="footer-links-list">
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="index.html#how-it-works">How it Works</a></li>
+                        <li><a href="contact.html">Contact Us</a></li>
+                        <li><a href="profile.html">My Profile</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 col-md-4">
+                    <h5 class="footer-heading">Legal Support</h5>
+                    <ul class="footer-links-list">
+                        <li><a href="privacy.html">Privacy Policy</a></li>
+                        <li><a href="terms.html">Term & Condition</a></li>
+                        <li><a href="help.html">Help Center</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom text-center">
+                <p class="text-secondary small mb-0">&copy; 2026 QuizProfitHub. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+    <script>
+        // Update points
+        document.addEventListener('DOMContentLoaded', () => {
+            const moneyEarned = localStorage.getItem('moneyEarned') || '0';
+            const balElement = document.getElementById('wallet-balance');
+            if(balElement) balElement.innerText = moneyEarned;
+        });
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

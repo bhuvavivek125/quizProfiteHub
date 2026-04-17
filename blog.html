@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QuizProfitHub | Blog & Insights</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link href="style.css" rel="stylesheet">
+    <style>
+        .blog-hero {
+            background: linear-gradient(rgba(11, 14, 20, 0.8), rgba(11, 14, 20, 0.9)), url('https://images.unsplash.com/photo-1434030216411-0b793f4b4173?auto=format&fit=crop&q=80&w=1600') center/cover;
+            padding: 100px 0;
+            border-radius: 30px;
+            margin-bottom: 60px;
+            border: 1px solid var(--border-color);
+        }
+        .blog-card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        .blog-card:hover {
+            transform: translateY(-12px);
+            border-color: var(--primary-green);
+            box-shadow: 0 15px 30px rgba(34, 197, 94, 0.1);
+        }
+        .blog-img-wrapper {
+            position: relative;
+            height: 220px;
+            overflow: hidden;
+        }
+        .blog-img-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+        .blog-card:hover .blog-img-wrapper img {
+            transform: scale(1.1);
+        }
+        .blog-category {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background: var(--primary-green);
+            color: #000;
+            padding: 5px 15px;
+            border-radius: 30px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            z-index: 10;
+        }
+        .blog-content {
+            padding: 25px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        .blog-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            color: white;
+            line-height: 1.4;
+            transition: color 0.3s ease;
+        }
+        .blog-card:hover .blog-title {
+            color: var(--primary-green);
+        }
+        .blog-meta {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            border-top: 1px solid rgba(255,255,255,0.05);
+            padding-top: 20px;
+            margin-top: auto;
+        }
+        .read-more-btn {
+            color: var(--primary-green);
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        .read-more-btn:hover i {
+            transform: translateX(5px);
+        }
+        .blog-sidebar-widget {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 25px;
+            margin-bottom: 30px;
+        }
+
+        /* Modern Pagination Styles */
+        .pagination-modern .page-link {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            color: var(--text-muted);
+            width: 45px;
+            height: 45px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 12px !important;
+            transition: all 0.3s ease;
+            font-weight: 600;
+        }
+        .pagination-modern .page-item.active .page-link {
+            background-color: var(--primary-green);
+            border-color: var(--primary-green);
+            color: black;
+            box-shadow: 0 4px 15px rgba(34, 197, 94, 0.3);
+        }
+        .pagination-modern .page-link:hover:not(.active) {
+            background-color: rgba(34, 197, 94, 0.1);
+            color: var(--primary-green);
+            border-color: var(--primary-green);
+        }
+        .pagination-modern .page-item.disabled .page-link {
+            background-color: transparent;
+            opacity: 0.3;
+            cursor: not-allowed;
+        }
+    </style>
+</head>
+<body class="dark-theme">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-transparent pt-4 pb-4">
+        <div class="container border-bottom border-secondary border-opacity-25 pb-3">
+            <a class="navbar-brand d-flex align-items-center gap-2" href="index.html">
+                <div class="logo-icon"><i class="bi bi-lightning-charge-fill"></i></div>
+                <span class="fw-bold fs-4">QuizProfitHub</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="index.html#categories">Categories</a></li>
+                    <li class="nav-item"><a class="nav-link" href="leaderboard.html">Leaderboard</a></li>
+                    <li class="nav-item"><a class="nav-link" href="profile.html">Profile</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="blog.html">Blog</a></li>
+                    <li class="nav-item"><a class="nav-link" href="contact.html">Contact Us</a></li>
+                </ul>
+                <div class="d-flex align-items-center gap-3">
+                    <div class="points-badge">
+                        <i class="bi bi-trophy-fill text-warning"></i> <span id="wallet-balance">0</span>
+                    </div>
+                    <a href="profile.html" class="profile-icon text-decoration-none">
+                        <i class="bi bi-person-fill"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+        <div class="blog-hero text-center text-white">
+            <div class="container py-5">
+                <span class="badge bg-primary-green text-dark rounded-pill px-3 py-2 mb-3 fw-bold">LATEST UPDATES</span>
+                <h1 class="display-3 fw-800 mb-3">Insights for <span class="text-primary-green">Quiz Masters</span></h1>
+                <p class="text-white-50 fs-5 mx-auto" style="max-width: 650px;">Explore strategies, general knowledge gems, and the latest trends from the world of competitive quizzing.</p>
+            </div>
+        </div>
+
+        <!-- Blog Top Ad -->
+        <div class="mb-5 text-center">
+            <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-9574633923880115" data-ad-slot="4081411500" data-ad-format="auto" data-full-width-responsive="true"></ins>
+            <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+        </div>
+
+        <div class="row g-4">
+            <div class="col-lg-8">
+                <div class="row g-4">
+                    <!-- Post 1: Strategic Quizzing -->
+                    <div class="col-md-6">
+                        <div class="blog-card">
+                            <div class="blog-img-wrapper">
+                                <span class="blog-category">STRATEGY</span>
+                                <img src="https://images.unsplash.com/photo-1434030216411-0b793f4b4173?auto=format&fit=crop&q=80&w=800" alt="Quiz Strategy">
+                            </div>
+                            <div class="blog-content">
+                                <h3 class="blog-title">The Ultimate Guide to Mastering Competitive Quizzes</h3>
+                                <p class="text-secondary small mb-4">Learn the secrets of top-tier quizzers: from effective elimination techniques to managing your time under pressure...</p>
+                                <a href="#" class="read-more-btn">Read Full Article <i class="bi bi-arrow-right"></i></a>
+                                <div class="blog-meta">
+                                    <span><i class="bi bi-calendar3 me-1"></i> Oct 24, 2026</span>
+                                    <span><i class="bi bi-clock me-1"></i> 8 min read</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Post 2: Memory Science -->
+                    <div class="col-md-6">
+                        <div class="blog-card">
+                            <div class="blog-img-wrapper">
+                                <span class="blog-category">BRAIN POWER</span>
+                                <img src="https://images.unsplash.com/photo-1559757175-5700dde675bc?auto=format&fit=crop&q=80&w=800" alt="Memory Improvement">
+                            </div>
+                            <div class="blog-content">
+                                <h3 class="blog-title">How Daily Quizzing Boosts Your Long-Term Memory</h3>
+                                <p class="text-secondary small mb-4">Scientific studies prove that active recall through trivia can strengthen neural pathways and slow cognitive decline...</p>
+                                <a href="#" class="read-more-btn">Read Full Article <i class="bi bi-arrow-right"></i></a>
+                                <div class="blog-meta">
+                                    <span><i class="bi bi-calendar3 me-1"></i> Oct 22, 2026</span>
+                                    <span><i class="bi bi-clock me-1"></i> 6 min read</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Post 3: Trivia Master -->
+                    <div class="col-md-6">
+                        <div class="blog-card">
+                            <div class="blog-img-wrapper">
+                                <span class="blog-category">TRIVIA GEMS</span>
+                                <img src="https://images.unsplash.com/photo-1532012197267-da84d127e765?auto=format&fit=crop&q=80&w=800" alt="History Trivia">
+                            </div>
+                            <div class="blog-content">
+                                <h3 class="blog-title">Top 10 Trivia Topics You Should Master This Year</h3>
+                                <p class="text-secondary small mb-4">From emerging tech to ancient civilizations, we've curated the most popular quiz themes to keep you ahead of the game...</p>
+                                <a href="#" class="read-more-btn">Read Full Article <i class="bi bi-arrow-right"></i></a>
+                                <div class="blog-meta">
+                                    <span><i class="bi bi-calendar3 me-1"></i> Oct 20, 2026</span>
+                                    <span><i class="bi bi-clock me-1"></i> 10 min read</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Post 4: Education & AI -->
+                    <div class="col-md-6">
+                        <div class="blog-card">
+                            <div class="blog-img-wrapper">
+                                <span class="blog-category">TECH TRENDS</span>
+                                <img src="https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&q=80&w=800" alt="AI Education">
+                            </div>
+                            <div class="blog-content">
+                                <h3 class="blog-title">Future of Learning: Why Gamified Quizzes are Winning</h3>
+                                <p class="text-secondary small mb-4">Explore how AI-driven personalization is making learning more fun and efficient than traditional classroom methods...</p>
+                                <a href="#" class="read-more-btn">Read Full Article <i class="bi bi-arrow-right"></i></a>
+                                <div class="blog-meta">
+                                    <span><i class="bi bi-calendar3 me-1"></i> Oct 18, 2026</span>
+                                    <span><i class="bi bi-clock me-1"></i> 7 min read</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Post 5: Success Motivation -->
+                    <div class="col-md-6">
+                        <div class="blog-card">
+                            <div class="blog-img-wrapper">
+                                <span class="blog-category">EDUCATION</span>
+                                <img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&q=80&w=800" alt="Success">
+                            </div>
+                            <div class="blog-content">
+                                <h3 class="blog-title">5 Tips to Prepare for Your First Pro Quiz Contest</h3>
+                                <p class="text-secondary small mb-4">Taking your hobby to a professional level? Here’s a checklist to ensure you’re mentally and intellectually ready...</p>
+                                <a href="#" class="read-more-btn">Read Full Article <i class="bi bi-arrow-right"></i></a>
+                                <div class="blog-meta">
+                                    <span><i class="bi bi-calendar3 me-1"></i> Oct 15, 2026</span>
+                                    <span><i class="bi bi-clock me-1"></i> 5 min read</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Post 6: Curiosity -->
+                    <div class="col-md-6">
+                        <div class="blog-card">
+                            <div class="blog-img-wrapper">
+                                <span class="blog-category">CURIOSITY</span>
+                                <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&q=80&w=800" alt="Curiosity">
+                            </div>
+                            <div class="blog-content">
+                                <h3 class="blog-title">The Psychology of Trivia: Why Curiosity Matters</h3>
+                                <p class="text-secondary small mb-4">Understand the 'Information Gap' theory and how it drives our thirst for knowledge and competitive spirit in games...</p>
+                                <a href="#" class="read-more-btn">Read Full Article <i class="bi bi-arrow-right"></i></a>
+                                <div class="blog-meta">
+                                    <span><i class="bi bi-calendar3 me-1"></i> Oct 12, 2026</span>
+                                    <span><i class="bi bi-clock me-1"></i> 9 min read</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pagination -->
+                <nav class="mt-5">
+                    <ul class="pagination pagination-modern justify-content-center gap-2">
+                        <li class="page-item disabled">
+                            <a class="page-link shadow-sm" href="#" tabindex="-1" aria-disabled="true">
+                                <i class="bi bi-chevron-left"></i>
+                            </a>
+                        </li>
+                        <li class="page-item active" aria-current="page"><a class="page-link shadow-sm" href="#">1</a></li>
+                        <li class="page-item"><a class="page-link shadow-sm" href="#">2</a></li>
+                        <li class="page-item"><a class="page-link shadow-sm" href="#">3</a></li>
+                        <li class="page-item">
+                            <a class="page-link shadow-sm" href="#">
+                                <i class="bi bi-chevron-right"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+
+            <!-- Sidebar -->
+            <div class="col-lg-4">
+                <div class="blog-sidebar-widget">
+                    <h5 class="fw-bold mb-4">Search Feed</h5>
+                    <div class="input-group">
+                        <input type="text" class="form-control bg-dark border-secondary border-opacity-25 text-white" placeholder="Search keywords...">
+                        <button class="btn btn-primary-green" type="button"><i class="bi bi-search"></i></button>
+                    </div>
+                </div>
+
+                <div class="blog-sidebar-widget text-center">
+                    <h5 class="fw-bold mb-4">Categories</h5>
+                    <div class="d-flex flex-wrap gap-2 justify-content-center">
+                        <a href="#" class="badge bg-dark border border-secondary border-opacity-25 text-secondary p-2 text-decoration-none">Science (12)</a>
+                        <a href="#" class="badge bg-dark border border-secondary border-opacity-25 text-secondary p-2 text-decoration-none">History (8)</a>
+                        <a href="#" class="badge bg-dark border border-secondary border-opacity-25 text-secondary p-2 text-decoration-none">Pop Culture (15)</a>
+                        <a href="#" class="badge bg-dark border border-secondary border-opacity-25 text-secondary p-2 text-decoration-none">Technology (10)</a>
+                        <a href="#" class="badge bg-dark border border-secondary border-opacity-25 text-secondary p-2 text-decoration-none">Sports (6)</a>
+                    </div>
+                </div>
+
+                <div class="blog-sidebar-widget">
+                    <h5 class="fw-bold mb-4 text-center">Subscribe Weekly</h5>
+                    <p class="text-secondary small text-center mb-4">Get the best trivia and tips delivered to your inbox every Monday.</p>
+                    <input type="email" class="form-control bg-dark border-secondary border-opacity-25 text-white mb-3 text-center" placeholder="your@email.com">
+                    <button class="btn btn-primary-green w-100 fw-bold">Join Newsletter</button>
+                </div>
+
+                <div class="text-center">
+                    <!-- Sidebar Ad -->
+                    <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-9574633923880115" data-ad-slot="4081411500" data-ad-format="auto" data-full-width-responsive="true"></ins>
+                    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer-modern">
+        <div class="container">
+            <div class="row g-4 text-start">
+                <div class="col-lg-4 footer-brand">
+                    <a class="navbar-brand d-flex align-items-center gap-2 mb-3" href="index.html">
+                        <div class="logo-icon"><i class="bi bi-lightning-charge-fill"></i></div>
+                        <span class="fw-bold fs-3 text-white">QuizProfitHub</span>
+                    </a>
+                    <p class="text-secondary small pe-lg-5">Empowering learners and quiz enthusiasts worldwide with rewarding and engaging challenges. Test your IQ and win today!</p>
+                    <div class="social-links">
+                        <a href="#" class="social-icon"><i class="bi bi-facebook"></i></a>
+                        <a href="#" class="social-icon"><i class="bi bi-twitter-x"></i></a>
+                        <a href="#" class="social-icon"><i class="bi bi-instagram"></i></a>
+                        <a href="#" class="social-icon"><i class="bi bi-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-4">
+                    <h5 class="footer-heading">Platform</h5>
+                    <ul class="footer-links-list">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="index.html#categories">Categories</a></li>
+                        <li><a href="leaderboard.html">Leaderboard</a></li>
+                        <li><a href="blog.html">Blog</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 col-md-4">
+                    <h5 class="footer-heading">Company</h5>
+                    <ul class="footer-links-list">
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="index.html#how-it-works">How it Works</a></li>
+                        <li><a href="contact.html">Contact Us</a></li>
+                        <li><a href="profile.html">My Profile</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 col-md-4">
+                    <h5 class="footer-heading">Legal Support</h5>
+                    <ul class="footer-links-list">
+                        <li><a href="privacy.html">Privacy Policy</a></li>
+                        <li><a href="terms.html">Term & Condition</a></li>
+                        <li><a href="help.html">Help Center</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom text-center">
+                <p class="text-secondary small mb-0">&copy; 2026 QuizProfitHub. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Update wallet balance from localStorage
+        document.addEventListener('DOMContentLoaded', () => {
+            const moneyEarned = localStorage.getItem('moneyEarned') || '0';
+            const balElement = document.getElementById('wallet-balance');
+            if(balElement) balElement.innerText = moneyEarned;
+        });
+
+        document.querySelectorAll('.pagination .page-link').forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const parent = link.parentElement;
+                if (!parent.classList.contains('disabled') && !parent.classList.contains('active')) {
+                    document.querySelector('.pagination .page-item.active').classList.remove('active');
+                    parent.classList.add('active');
+                    // In a real app, you would fetch new posts here.
+                    // For now, we scroll back to the top of the blog grid
+                    window.scrollTo({
+                        top: document.querySelector('.blog-hero').offsetHeight + 50,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

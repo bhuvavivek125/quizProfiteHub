@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QuizProfitHub | Learn, Play & Win</title>
+    <!-- AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9574633923880115"
+        crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .ad-modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(8px);
+            z-index: 9999;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .ad-modal-content {
+            background: #1a1d24;
+            border: 1px solid var(--border-color);
+            border-radius: 24px;
+            max-width: 500px;
+            width: 100%;
+            position: relative;
+            padding: 30px;
+            text-align: center;
+            animation: modalFadeIn 0.5s ease;
+        }
+
+        @keyframes modalFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .close-ad-btn {
+            position: absolute;
+            top: -15px;
+            right: -15px;
+            background: var(--primary-green);
+            color: black;
+            border: none;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(34, 197, 94, 0.4);
+        }
+    </style>
+</head>
+
+<body class="dark-theme">
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-transparent pt-3 pb-3">
+        <div class="container border-bottom border-secondary border-opacity-25 pb-2">
+            <a class="navbar-brand d-flex align-items-center gap-2" href="#">
+                <div class="logo-icon"><i class="bi bi-lightning-charge-fill"></i></div>
+                <span class="fw-bold fs-4">QuizProfitHub</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item"><a class="nav-link active" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="index.html#categories">Categories</a></li>
+                    <li class="nav-item"><a class="nav-link" href="leaderboard.html">Leaderboard</a></li>
+                    <li class="nav-item"><a class="nav-link" href="profile.html">Profile</a></li>
+                    <li class="nav-item"><a class="nav-link" href="blog.html">Blog</a></li>
+                    <li class="nav-item"><a class="nav-link" href="contact.html">Contact Us</a></li>
+                </ul>
+                <div class="d-flex align-items-center gap-3">
+                    <div class="points-badge">
+                        <i class="bi bi-trophy-fill text-warning"></i> <span id="wallet-balance">0</span>
+                    </div>
+                    <a href="profile.html" class="profile-icon text-decoration-none">
+                        <i class="bi bi-person-fill"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Top Ad -->
+    <div class="container mt-3 mb-2 py-0">
+        <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-9574633923880115"
+            data-ad-slot="4081411500" data-ad-format="auto" data-full-width-responsive="true"></ins>
+        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero-section text-center pt-4 pb-5">
+        <div class="container">
+            <div class="d-inline-flex align-items-center gap-2 px-3 py-2 rounded-pill hero-badge mb-3">
+                <i class="bi bi-stars text-primary-green"></i>
+                <span class="text-primary-green small fw-medium">Test Your Knowledge & Win Rewards</span>
+            </div>
+            <h1 class="display-4 fw-bolder mb-3">Learn, Play & <span class="text-primary-green">Win</span><br>with
+                Quizzes</h1>
+            <p class="text-secondary mx-auto mb-5 fs-5" style="max-width: 600px;">
+                Challenge yourself across multiple categories, earn points, climb the leaderboard, and unlock
+                achievements. Start your quiz journey today!
+            </p>
+            <div class="d-flex justify-content-center gap-3">
+                <button class="btn btn-primary-green btn-lg px-4 fw-semibold rounded-pill"
+                    onclick="document.querySelector('#categories').scrollIntoView({behavior: 'smooth'})">Start Playing
+                    <i class="bi bi-arrow-right ms-2"></i></button>
+                <a href="leaderboard.html" class="btn btn-outline-light btn-lg px-4 fw-semibold rounded-pill"><i
+                        class="bi bi-trophy ms-2"></i> View Leaderboard</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats-section pb-4" style="margin-top: 20px;">
+        <div class="container border-bottom border-secondary border-opacity-25 pb-4">
+            <div class="row g-4 justify-content-center">
+                <div class="col-lg-3 col-md-6">
+                    <div class="stat-card">
+                        <div class="d-flex justify-content-between align-items-start mb-2">
+                            <span class="text-secondary small fw-medium">Total Points</span>
+                            <div class="stat-icon bg-success bg-opacity-10 text-success"><i
+                                    class="bi bi-trophy-fill"></i></div>
+                        </div>
+                        <h3 class="fw-bold mb-1">0</h3>
+                        <span class="text-secondary small">Keep playing to earn more!</span>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="stat-card">
+                        <div class="d-flex justify-content-between align-items-start mb-2">
+                            <span class="text-secondary small fw-medium">Current Streak</span>
+                            <div class="stat-icon bg-warning bg-opacity-10 text-warning"><i class="bi bi-fire"></i>
+                            </div>
+                        </div>
+                        <h3 class="fw-bold mb-1 text-white">0 days</h3>
+                        <span class="text-secondary small">Start a streak today!</span>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="stat-card">
+                        <div class="d-flex justify-content-between align-items-start mb-2">
+                            <span class="text-secondary small fw-medium">Quizzes Taken</span>
+                            <div class="stat-icon bg-info bg-opacity-10 text-info"><i class="bi bi-bullseye"></i></div>
+                        </div>
+                        <h3 class="fw-bold mb-1">0</h3>
+                        <span class="text-secondary small">0 perfect scores</span>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="stat-card">
+                        <div class="d-flex justify-content-between align-items-start mb-2">
+                            <span class="text-secondary small fw-medium">Level</span>
+                            <div class="stat-icon bg-success bg-opacity-10 text-success"><i class="bi bi-star-fill"></i>
+                            </div>
+                        </div>
+                        <h3 class="fw-bold mb-1">1</h3>
+                        <span class="text-secondary small">0 XP total</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Middle Ad -->
+    <div class="container my-5 py-0 px-0 text-center">
+        <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-9574633923880115"
+            data-ad-slot="4081411500" data-ad-format="auto" data-full-width-responsive="true"></ins>
+        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+
+    <!-- Featured Categories -->
+    <section id="categories" class="categories-section py-5 mt-2">
+        <div class="container">
+            <div class="d-flex justify-content-between align-items-end mb-4">
+                <div>
+                    <h2 class="fw-bold mb-2">Featured Categories</h2>
+                    <p class="text-secondary mb-0">Choose a category and test your knowledge</p>
+                </div>
+                <button id="view-all-btn" class="btn btn-outline-light btn-sm px-4 rounded-pill">View All <i
+                        class="bi bi-arrow-right"></i></button>
+            </div>
+
+            <div class="row g-4" id="dynamic-categories">
+                <!-- Categories will be injected here via JS -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Cookie Consent Banner -->
+    <div id="cookie-consent" class="fixed-bottom bg-dark text-white p-3 border-top border-secondary border-opacity-25"
+        style="z-index: 1050; display: none;">
+        <div class="container d-flex flex-column flex-md-row justify-content-between align-items-center gap-3">
+            <div class="small">
+                <strong>We Value Your Privacy</strong> <br>
+                We use cookies to enhance your browsing experience, serve personalized ads or content. <a
+                    href="privacy.html" class="text-primary-green text-decoration-underline">Read our Privacy
+                    Policy</a>.
+            </div>
+            <div class="d-flex gap-2">
+                <button class="btn btn-outline-light btn-sm" onclick="acceptCookies()">Decline</button>
+                <button class="btn btn-primary-green btn-sm fw-bold px-4" onclick="acceptCookies()">Accept All</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- How It Works -->
+    <section id="how-it-works" class="how-it-works py-3">
+        <div class="container text-center border-bottom border-secondary border-opacity-25 pb-4">
+            <h2 class="fw-bold mb-1">How It Works</h2>
+            <p class="text-secondary mb-4">Three simple steps to start winning</p>
+
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="step-card">
+                        <div class="step-number">01</div>
+                        <div class="step-icon"><i class="bi bi-bullseye"></i></div>
+                        <h5 class="fw-bold mt-4 mb-2">Choose a Category</h5>
+                        <p class="text-secondary small">Browse through our diverse quiz categories and pick the topic
+                            you want to master.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="step-card">
+                        <div class="step-number">02</div>
+                        <div class="step-icon"><i class="bi bi-lightning-charge"></i></div>
+                        <h5 class="fw-bold mt-4 mb-2">Answer Questions</h5>
+                        <p class="text-secondary small">Race against the clock to answer questions correctly and earn
+                            maximum points.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="step-card">
+                        <div class="step-number">03</div>
+                        <div class="step-icon"><i class="bi bi-trophy"></i></div>
+                        <h5 class="fw-bold mt-4 mb-2">Win Rewards</h5>
+                        <p class="text-secondary small">Earn points, unlock achievements, and climb the leaderboard to
+                            become a champion!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Bottom Ad -->
+    <div class="container my-2">
+        <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-9574633923880115"
+            data-ad-slot="4081411500" data-ad-format="auto" data-full-width-responsive="true"></ins>
+        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+
+    <!-- CTA Section -->
+    <section class="hero-section py-5">
+        <div class="container text-center py-4">
+            <div class="cta-box text-center p-md-5 p-4 rounded-4 shadow-lg">
+                <h2 class="fw-bold mb-3 text-dark display-5">Ready to Test Your Knowledge?</h2>
+                <p class="text-dark opacity-75 mb-4 mx-auto" style="max-width: 500px; font-weight: 500;">Join thousands
+                    of quiz enthusiasts and start winning today.</p>
+                <button class="btn btn-dark btn-lg px-4 rounded-pill fw-bold"
+                    onclick="document.querySelector('#categories').scrollIntoView({behavior: 'smooth'})">Start Your
+                    First Quiz <i class="bi bi-arrow-right ms-2"></i></button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Interstitial Ad Popup -->
+    <div id="adModal" class="ad-modal-overlay">
+        <div class="ad-modal-content">
+            <button class="close-ad-btn" onclick="closeAd()">&times;</button>
+            <h5 class="text-white fw-bold mb-3">Special Offer for You!</h5>
+            <div id="ad-wrapper" style="min-height: 250px;">
+                <!-- AdSense Code -->
+                <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-9574633923880115"
+                    data-ad-slot="4081411500" data-ad-format="auto" data-full-width-responsive="true"></ins>
+                <script>
+                    (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
+            </div>
+            <button class="btn btn-outline-secondary btn-sm rounded-pill mt-2" onclick="closeAd()">Skip Ad</button>
+        </div>
+    </div>
+
+    <footer class="footer-modern">
+        <div class="container">
+            <div class="row g-4 text-start">
+                <div class="col-lg-4 footer-brand">
+                    <a class="navbar-brand d-flex align-items-center gap-2 mb-3" href="index.html">
+                        <div class="logo-icon"><i class="bi bi-lightning-charge-fill"></i></div>
+                        <span class="fw-bold fs-3 text-white">QuizProfitHub</span>
+                    </a>
+                    <p class="text-secondary small pe-lg-5">Empowering learners and quiz enthusiasts worldwide with
+                        rewarding and engaging challenges. Test your IQ and win today!</p>
+                    <div class="social-links">
+                        <a href="#" class="social-icon"><i class="bi bi-facebook"></i></a>
+                        <a href="#" class="social-icon"><i class="bi bi-twitter-x"></i></a>
+                        <a href="#" class="social-icon"><i class="bi bi-instagram"></i></a>
+                        <a href="#" class="social-icon"><i class="bi bi-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-4">
+                    <h5 class="footer-heading">Platform</h5>
+                    <ul class="footer-links-list">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="index.html#categories">Categories</a></li>
+                        <li><a href="leaderboard.html">Leaderboard</a></li>
+                        <li><a href="blog.html">Blog</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 col-md-4">
+                    <h5 class="footer-heading">Company</h5>
+                    <ul class="footer-links-list">
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="index.html#how-it-works">How it Works</a></li>
+                        <li><a href="contact.html">Contact Us</a></li>
+                        <li><a href="profile.html">My Profile</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 col-md-4">
+                    <h5 class="footer-heading">Legal Support</h5>
+                    <ul class="footer-links-list">
+                        <li><a href="privacy.html">Privacy Policy</a></li>
+                        <li><a href="terms.html">Term & Condition</a></li>
+                        <li><a href="help.html">Help Center</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom text-center">
+                <p class="text-secondary small mb-0">&copy; 2026 QuizProfitHub. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        let selectedCategoryUrl = '';
+
+        function startQuiz(categoryId) {
+            localStorage.setItem('selectedCategory', categoryId);
+            selectedCategoryUrl = 'quiz.html';
+            const adModal = document.getElementById('adModal');
+
+            // Show ad modal when starting quiz
+            adModal.style.display = 'flex';
+
+            // Refresh ad
+            try {
+                (adsbygoogle = window.adsbygoogle || []).push({});
+            } catch (e) { }
+        }
+
+        function closeAd() {
+            document.getElementById('adModal').style.display = 'none';
+            // If they were starting a quiz, take them to the quiz page now
+            if (selectedCategoryUrl) {
+                window.location.href = selectedCategoryUrl;
+            }
+        }
+
+        // Setup balance from existing local storage logic
+        document.addEventListener('DOMContentLoaded', () => {
+            // Trigger Ad Popup after 3 seconds
+            setTimeout(() => {
+                const adModal = document.getElementById('adModal');
+                const adIns = adModal.querySelector('ins');
+
+                // Only show modal if the ad is filled by Google
+                if (adIns && adIns.getAttribute('data-ad-status') !== 'unfilled') {
+                    adModal.style.display = 'flex';
+                }
+            }, 3000);
+
+            const moneyEarned = localStorage.getItem('moneyEarned') || '0';
+            const balElement = document.getElementById('wallet-balance');
+            if (balElement) balElement.innerText = moneyEarned;
+
+            // Generate 30 Categories
+            const cats = [
+                { id: 'science', icon: '🔬', name: 'Science', desc: 'Explore physics, chemistry, and biology', diff: 'Medium', color: 'warning' },
+                { id: 'gk', icon: '📜', name: 'General Knowledge', desc: 'Journey through time and discover world facts', diff: 'Medium', color: 'warning' },
+                { id: 'math', icon: '💻', name: 'Math & Logic', desc: 'Test your knowledge of numbers and logic', diff: 'Hard', color: 'danger' },
+                { id: 'gk', icon: '🌎', name: 'Geography', desc: 'Discover countries, capitals, and landmarks', diff: 'Easy', color: 'success' },
+                { id: 'sports', icon: '⚽', name: 'Sports', desc: 'Challenge your sports knowledge from around the globe', diff: 'Medium', color: 'warning' },
+                { id: 'bollywood', icon: '🎬', name: 'Entertainment', desc: 'Movies, music, TV shows and pop culture', diff: 'Easy', color: 'success' },
+                { id: 'gk', icon: '🚀', name: 'Space & Astronomy', desc: 'Explore the universe, planets, and galaxies', diff: 'Hard', color: 'danger' },
+                { id: 'gk', icon: '🍎', name: 'Food & Culinary', desc: 'Dishes, ingredients, and world cuisines', diff: 'Easy', color: 'success' },
+                { id: 'gk', icon: '🐾', name: 'Nature & Wildlife', desc: 'Animals, plants, and the natural world', diff: 'Medium', color: 'warning' },
+                { id: 'gk', icon: '🎨', name: 'Art & Literature', desc: 'Famous paintings, books, and authors', diff: 'Medium', color: 'warning' },
+                { id: 'gk', icon: '📱', name: 'Technology', desc: 'Gadgets, internet, and modern tech', diff: 'Easy', color: 'success' },
+                { id: 'gk', icon: '🎵', name: 'Music Audio', desc: 'Bands, instruments, and music history', diff: 'Medium', color: 'warning' },
+                { id: 'gk', icon: '🚙', name: 'Vehicles', desc: 'Cars, planes, trains, and automobiles', diff: 'Easy', color: 'success' },
+                { id: 'gk', icon: '💰', name: 'Business & Finance', desc: 'Economics, companies, and money facts', diff: 'Hard', color: 'danger' },
+                { id: 'gk', icon: '🎮', name: 'Video Games', desc: 'Gaming history, consoles, and characters', diff: 'Easy', color: 'success' },
+                { id: 'gk', icon: '👗', name: 'Fashion', desc: 'Clothing trends, brands, and designers', diff: 'Medium', color: 'warning' },
+                { id: 'gk', icon: '🗣️', name: 'Languages', desc: 'World languages, translation, and grammar', diff: 'Hard', color: 'danger' },
+                { id: 'gk', icon: '🗿', name: 'Myths & Legends', desc: 'Greek, Norse, and global mythology', diff: 'Medium', color: 'warning' },
+                { id: 'gk', icon: '🏛️', name: 'Politics', desc: 'World leaders, laws, and governments', diff: 'Hard', color: 'danger' },
+                { id: 'gk', icon: '⚕️', name: 'Health & Medical', desc: 'Human body, medicine, and wellness', diff: 'Medium', color: 'warning' },
+                { id: 'gk', icon: '🏗️', name: 'Architecture', desc: 'Famous buildings, bridges, and monuments', diff: 'Hard', color: 'danger' },
+                { id: 'gk', icon: '🧠', name: 'Psychology', desc: 'Human behavior, brain, and mental health', diff: 'Medium', color: 'warning' },
+                { id: 'gk', icon: '🌱', name: 'Environment', desc: 'Climate, ecology, and conservation', diff: 'Easy', color: 'success' },
+                { id: 'gk', icon: '🛳️', name: 'Nautical', desc: 'Ships, oceans, and maritime history', diff: 'Hard', color: 'danger' },
+                { id: 'gk', icon: '✈️', name: 'Aviation', desc: 'Airplanes, pilots, and flying facts', diff: 'Medium', color: 'warning' },
+                { id: 'gk', icon: '🛡️', name: 'Military History', desc: 'Wars, battles, and legendary generals', diff: 'Hard', color: 'danger' },
+                { id: 'gk', icon: '🎸', name: 'Rock & Roll', desc: 'Classic rock, metal, and legendary bands', diff: 'Medium', color: 'warning' },
+                { id: 'gk', icon: '🎭', name: 'Theater & Broadway', desc: 'Musicals, plays, and stage actors', diff: 'Easy', color: 'success' },
+                { id: 'gk', icon: '🏺', name: 'Ancient History', desc: 'Egyptians, Romans, and ancient empires', diff: 'Hard', color: 'danger' },
+                { id: 'gk', icon: '🦸', name: 'Comics & Superheroes', desc: 'Marvel, DC, and comic book lore', diff: 'Easy', color: 'success' }
+            ];
+            let showingAll = false;
+
+            function renderCats() {
+                const grid = document.getElementById('dynamic-categories');
+                const btn = document.getElementById('view-all-btn');
+                if (!grid) return;
+
+                const displayCats = showingAll ? cats : cats.slice(0, 6);
+
+                grid.innerHTML = displayCats.map(c => `
+                    <div class="col-lg-4 col-md-6 mb-2">
+                        <div class="category-card h-100" onclick="startQuiz('${c.id}')">
+                            <div class="category-icon-wrapper mb-3"><span class="fs-1">${c.icon}</span></div>
+                            <h4 class="fw-bold mb-2">${c.name}</h4>
+                            <p class="text-secondary small mb-4">${c.desc}</p>
+                            <div class="d-flex gap-3 text-secondary small mb-3">
+                                <span><i class="bi bi-question-circle"></i> 10 Questions</span>
+                                <span><i class="bi bi-clock"></i> 25s each</span>
+                            </div>
+                            <div class="d-flex justify-content-between align-items-center mt-auto">
+                                <span class="badge bg-${c.color} bg-opacity-10 text-${c.color} px-3 py-2 badge-custom"><i class="bi bi-lightning-fill"></i> ${c.diff}</span>
+                                <span class="play-now-text text-primary-green fw-bold small">Play Now &rarr;</span>
+                            </div>
+                        </div>
+                    </div>
+                `).join('');
+
+                if (btn) {
+                    btn.innerHTML = showingAll ? 'Show Less <i class="bi bi-arrow-up"></i>' : 'View All <i class="bi bi-arrow-right"></i>';
+                }
+            }
+
+            renderCats();
+
+            const viewAllBtn = document.getElementById('view-all-btn');
+            if (viewAllBtn) {
+                viewAllBtn.addEventListener('click', () => {
+                    showingAll = !showingAll;
+                    renderCats();
+                });
+            }
+
+            // Cookie Consent Check
+            if (!localStorage.getItem('cookieConsent')) {
+                document.getElementById('cookie-consent').style.display = 'block';
+            }
+        });
+
+        function acceptCookies() {
+            localStorage.setItem('cookieConsent', 'true');
+            document.getElementById('cookie-consent').style.display = 'none';
+        }
+    </script>
+</body>
+
+</html>

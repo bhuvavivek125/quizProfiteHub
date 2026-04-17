@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QuizProfitHub | About Our Journey</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link href="style.css" rel="stylesheet">
+    <style>
+        .about-hero {
+            background: linear-gradient(135deg, rgba(34, 197, 94, 0.15) 0%, rgba(11, 14, 20, 1) 100%);
+            padding: 100px 0;
+            border-radius: 40px;
+            margin-bottom: 80px;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+        }
+
+        .about-hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(34, 197, 94, 0.05) 0%, transparent 70%);
+            z-index: 0;
+        }
+
+        .mission-card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 24px;
+            padding: 40px;
+            height: 100%;
+            transition: transform 0.3s ease, border-color 0.3s ease;
+        }
+
+        .mission-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--primary-green);
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 800;
+            color: var(--primary-green);
+            margin-bottom: 5px;
+        }
+
+        .stats-section {
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 30px;
+            padding: 60px 40px;
+            border: 1px solid var(--border-color);
+        }
+
+        .about-img-frame {
+            border-radius: 30px;
+            overflow: hidden;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+            border: 1px solid var(--border-color);
+        }
+    </style>
+</head>
+
+<body class="dark-theme">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-transparent pt-4 pb-4">
+        <div class="container border-bottom border-secondary border-opacity-25 pb-3">
+            <a class="navbar-brand d-flex align-items-center gap-2" href="index.html">
+                <div class="logo-icon"><i class="bi bi-lightning-charge-fill"></i></div>
+                <span class="fw-bold fs-4">QuizProfitHub</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="index.html#categories">Categories</a></li>
+                    <li class="nav-item"><a class="nav-link" href="leaderboard.html">Leaderboard</a></li>
+                    <li class="nav-item"><a class="nav-link" href="profile.html">Profile</a></li>
+                    <li class="nav-item"><a class="nav-link" href="blog.html">Blog</a></li>
+                    <li class="nav-item"><a class="nav-link" href="contact.html">Contact Us</a></li>
+                </ul>
+                <div class="d-flex align-items-center gap-3">
+                    <div class="points-badge">
+                        <i class="bi bi-trophy-fill text-warning"></i> <span id="wallet-balance">0</span>
+                    </div>
+                    <a href="profile.html" class="profile-icon text-decoration-none">
+                        <i class="bi bi-person-fill"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container py-5">
+        <div class="about-hero text-center position-relative z-1">
+            <h4 class="text-primary-green fw-bold mb-3">WHO WE ARE</h4>
+            <h1 class="display-3 fw-800 text-white mb-4">Empowering Curiosity <br> Through <span
+                    class="text-primary-green">Play</span></h1>
+            <p class="text-secondary mx-auto fs-5" style="max-width: 700px;">QuizProfitHub started with a simple idea:
+                making learning as addictive as gaming. Today, we're a global hub for knowledge seekers.</p>
+        </div>
+
+        <div class="row align-items-center mb-5 pb-5">
+            <div class="col-lg-6 mb-5 mb-lg-0">
+                <div class="about-img-frame">
+                    <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&q=80&w=1200"
+                        alt="Team Work" class="w-100">
+                </div>
+            </div>
+            <div class="col-lg-6 ps-lg-5">
+                <h2 class="fw-800 text-white mb-4">Our <span class="text-primary-green">Journey</span></h2>
+                <p class="text-secondary mb-4 fs-5">We believe that knowledge should be rewarded. That's why we created
+                    a platform where every correct answer brings you closer to being a local legend.</p>
+                <div class="d-flex flex-column gap-3">
+                    <div class="d-flex align-items-center gap-3">
+                        <i class="bi bi-check-circle-fill text-primary-green fs-4"></i>
+                        <span class="text-white fw-bold">100% Free for Learners</span>
+                    </div>
+                    <div class="d-flex align-items-center gap-3">
+                        <i class="bi bi-check-circle-fill text-primary-green fs-4"></i>
+                        <span class="text-white fw-bold">Live Global Rankings</span>
+                    </div>
+                    <div class="d-flex align-items-center gap-3">
+                        <i class="bi bi-check-circle-fill text-primary-green fs-4"></i>
+                        <span class="text-white fw-bold">Reward-Based Challenges</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="stats-section mb-5">
+            <div class="row text-center g-4">
+                <div class="col-6 col-md-3">
+                    <div class="stat-number">5K+</div>
+                    <div class="small fw-bold text-secondary text-uppercase tracking-wider">Active Users</div>
+                </div>
+                <div class="col-6 col-md-3">
+                    <div class="stat-number">50+</div>
+                    <div class="small fw-bold text-secondary text-uppercase tracking-wider">Categories</div>
+                </div>
+                <div class="col-6 col-md-3">
+                    <div class="stat-number">2M+</div>
+                    <div class="small fw-bold text-secondary text-uppercase tracking-wider">Points Earned</div>
+                </div>
+                <div class="col-6 col-md-3">
+                    <div class="stat-number">10K+</div>
+                    <div class="small fw-bold text-secondary text-uppercase tracking-wider">Quizzes Played</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row g-4 mt-5">
+            <div class="col-md-6">
+                <div class="mission-card">
+                    <div class="help-icon mb-4"><i class="bi bi-bullseye"></i></div>
+                    <h3 class="text-white fw-bold mb-3">Our Mission</h3>
+                    <p class="text-secondary fs-5">To democratize education by turning every general knowledge question
+                        into a rewarding gaming experience accessible to anyone, anywhere.</p>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="mission-card">
+                    <div class="help-icon mb-4"><i class="bi bi-eye"></i></div>
+                    <h3 class="text-white fw-bold mb-3">Our Vision</h3>
+                    <p class="text-secondary fs-5">To become the world's most engaging trivia platform where curiosity
+                        meets competition, creating a smarter global community.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer-modern">
+        <div class="container">
+            <div class="row g-4 text-start">
+                <div class="col-lg-4 footer-brand">
+                    <a class="navbar-brand d-flex align-items-center gap-2 mb-3" href="index.html">
+                        <div class="logo-icon"><i class="bi bi-lightning-charge-fill"></i></div>
+                        <span class="fw-bold fs-3 text-white">QuizProfitHub</span>
+                    </a>
+                    <p class="text-secondary small pe-lg-5">Empowering learners and quiz enthusiasts worldwide with
+                        rewarding and engaging challenges. Test your IQ and win today!</p>
+                    <div class="social-links">
+                        <a href="#" class="social-icon"><i class="bi bi-facebook"></i></a>
+                        <a href="#" class="social-icon"><i class="bi bi-twitter-x"></i></a>
+                        <a href="#" class="social-icon"><i class="bi bi-instagram"></i></a>
+                        <a href="#" class="social-icon"><i class="bi bi-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-4">
+                    <h5 class="footer-heading">Platform</h5>
+                    <ul class="footer-links-list">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="index.html#categories">Categories</a></li>
+                        <li><a href="leaderboard.html">Leaderboard</a></li>
+                        <li><a href="blog.html">Blog</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 col-md-4">
+                    <h5 class="footer-heading">Company</h5>
+                    <ul class="footer-links-list">
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="index.html#how-it-works">How it Works</a></li>
+                        <li><a href="contact.html">Contact Us</a></li>
+                        <li><a href="profile.html">My Profile</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 col-md-4">
+                    <h5 class="footer-heading">Legal Support</h5>
+                    <ul class="footer-links-list">
+                        <li><a href="privacy.html">Privacy Policy</a></li>
+                        <li><a href="terms.html">Term & Condition</a></li>
+                        <li><a href="help.html">Help Center</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom text-center">
+                <p class="text-secondary small mb-0">&copy; 2026 QuizProfitHub. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+    <script>
+        // Update points
+        document.addEventListener('DOMContentLoaded', () => {
+            const moneyEarned = localStorage.getItem('moneyEarned') || '0';
+            const balElement = document.getElementById('wallet-balance');
+            if (balElement) balElement.innerText = moneyEarned;
+        });
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
